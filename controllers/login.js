@@ -1,7 +1,7 @@
 onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) {
 
-    $scope.username = luminate_config.username;
-    $scope.password = luminate_config.password;
+    $scope.username = luminate_config.username || "";
+    $scope.password = luminate_config.password || "";
 
     //ALC Options
     var header = {
