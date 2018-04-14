@@ -23,7 +23,7 @@
                     </td>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="participant in members | filter:searchBox | orderBy:'+name.last' | limitTo:1000" ng-click="open('lg', participant)">
+                    <tr ng-repeat="participant in members | filter:searchBox | orderBy:'+name.last' | limitTo:100" ng-click="open(participant)">
                         <td>{{participant.name.first}}</td>
                         <td>{{participant.name.last}}</td>
                         <td>{{participant.email.primary_address}}</td>

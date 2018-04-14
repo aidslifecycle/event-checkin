@@ -18,11 +18,19 @@
                     <strong> {{ selected.consInfo.email.primary_address }}</strong>
                 </a>
                 <a href="#" class="list-group-item">
-                    Address:
-                    <strong> {{ selected.consInfo.primary_address.street1 }}
-                        <br /> {{ selected.consInfo.primary_address.city }}, {{ selected.consInfo.primary_address.state }} {{ selected.consInfo.primary_address.zip
-                        }}
+                    City/State:
+                    <br />
+                    <strong>{{ selected.consInfo.primary_address.city }}, {{ selected.consInfo.primary_address.state }}
+                        <br />{{ selected.consInfo.primary_address.zip}}
                     </strong>
+                </a>
+                <a href="#" class="list-group-item">
+                    <form name="dotrNumberForm">
+                        <div class="input-group">
+                            <p>Day on the Ride Cyclist Number</p>
+                            <input required type="text" minlength="4" maxlength="4" class="form-control" ng-model="dotrNumber" placeholder="Day on the Ride Number">
+                        </div>
+                    </form>
                 </a>
             </div>
         </div>
@@ -33,7 +41,7 @@
     <button class="btn btn-warning pull-left" type="button" ng-click="cancel()">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
     </button>
-    <button class="btn btn-success" type="button" ng-click="ok()">
+    <button class="btn btn-success" type="button" ng-disabled="dotrNumberForm.$invalid" ng-click="ok()">
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Check-in
     </button>
 </div>

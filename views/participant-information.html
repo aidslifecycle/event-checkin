@@ -1,0 +1,45 @@
+<div class="panel panel-primary boxShadow">
+	<div class="panel-heading">
+		<h3>{{ cons_info.name.first + " " + cons_info.name.last}}</h3>
+	</div>
+	<div class="panel-body">
+
+		<div class="row">
+
+			<div class="col-xs-12 col-md-6">
+				<h4>{{ cons_info.name.first + " " + cons_info.name.last }}</h4>
+				<h5>{{ cons_info.email.primary_address }}</h5>
+				<h4>Address:</h4>
+				<h5>{{ cons_info.primary_address.city}}, {{ cons_info.primary_address.state}}, {{ cons_info.primary_address.zip}}</h5>
+			</div>
+
+			<div class="col-xs-12 col-md-6">
+				<h4>Day on the Ride #:</h4>
+				<input style="width:165px" type="text" placeholder="Day on the Ride Number" ng-model="dotrNumber" minlength="4" maxlength="4" required>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<h3>Confirm Check-in</h3>
+			<div class="divider"></div>
+			<div class="checkbox">
+				<label>
+					<input ng-model="waiver" type="checkbox" value=""> Received Waiver
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input ng-model="dotrNumberConfirmed" type="checkbox" value=""> Confirmed DOTR #
+				</label>
+			</div>
+		</div>
+		</form>
+		<!-- Check-In Controls -->
+		<div class="row">
+			<div class="col-xs-12 dotr_button">
+				<span ng-if="coney" class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+				<br />
+				<button ng-disabled="!dotrNumberConfirmed || !waiver || dotrNumber.length < 4" ng-click="checkIn()" class="btn btn-success part-info">CHECK-IN</button>
+			</div>
+		</div>
+	</div>
+</div>

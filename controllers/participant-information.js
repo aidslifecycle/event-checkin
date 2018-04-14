@@ -1,92 +1,53 @@
-//Include after app module and participant-search.js
-onlineCheckin.controller('participantInformation', function ($scope, $http, $rootScope, $log, $uibModalInstance, participant) {
+// Include after app module and participant-search.js
+onlineCheckin.controller('participantInformation', function($scope, $timeout, LogInteraction, constituentService, participantProgress, $http, $rootScope, $log, $routeParams, $location) {
 
-    //ALC Options
-    var header = {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        uri = "https://actnow.tofighthiv.org/site/",
-        postdata = "&api_key="+luminate_config.api_key+"&v=1.0&response_format=json";
+    if ($rootScope.loggedIn === false) {
+        alert("You are not logged in!");
+        window.location.href = '#!/';
+    }
 
-    $scope.checkInButtonDisable = true;
-    $scope.selected = participant;
-    // $rootScope.badgeInformation = {
+    // Get the participant's Consituent ID from the URL
+    $scope.cons_id = $scope.$routeParams = $routeParams.cons_id;
 
-    //     firstName: $scope.selected.consInfo.name.first,
-    //     lastName: $scope.selected.consInfo.name.last,
-    //     partType: $scope.selected.partType,
-    //     teamName: $scope.selected.teamName,
-    //     isTeamCaptain: true,
-    //     isRoadieCaption: false,
-    //     roadieTeamAssignment: "Rest Stop 1"
+    //@todo get ALC NUMBER
+    $scope.alcnum = "";
 
-    // };
+    // Initialize notes field, waiver, and set Coney Success image to false
+    $scope.notes = "";
+    $scope.dotrNumber = "";
+    $scope.waiver = false;
+    $scope.donorServices;
+    $scope.dotrNumberConfirmed = "";
+    $scope.coney = false;
 
-    // $scope.displayBadge = function() {
+    // Create the cons_info Object
+    $scope.cons_info = {};
 
-    //     switch ($scope.selected.consInfo.custom.string[0].content) {
-    //         case "STAFF":
-    //             $scope.badgeSrc = "img/lanyard-alc-staff.jpg";
-    //             break;
-    //         case "ROADIE":
-    //             $scope.badgeSrc = "img/lanyard-roadie.jpg";
-    //             break;
-    //         case "VIRTUAL CYCLIST":
-    //             $scope.badgeSrc = "img/lanyard-virtual-cyclist.jpg";
-    //             break;                
-    //         default:
-    //             $scope.badgeSrc = "img/sf-expo.png";
-    //     }
-    // };
+    constituentService.getConsRecord($scope.cons_id).then(function(data) {
 
-    // $scope.displayBadge();
+        $scope.cons_info = data.data.getConsResponse;
+        console.log("CONS:", $scope.cons_info);
+        console.log("ROOT:", $rootScope);
 
-    $scope.printBadge = function() {
-        window.print();
-        $scope.checkInButtonDisable = false;
-    };
+        var customBooleans = $scope.cons_info.custom.boolean;
+        var customStrings = $scope.cons_info.custom.string;
+        $scope.groupArray = [].concat(customBooleans, customStrings);
 
-    $scope.ok = function() {
 
-        $rootScope.badgeInformation = {};
+    });
 
-        var luminateServlet = "CRConsAPI",
-            luminateMethod = "method=logInteraction",
-            sso_auth_token = "&sso_auth_token=" + $rootScope.sso_auth_token,
-            //What is the consId?
-            consId = "&cons_id=" + $scope.selected.consInfo.cons_id,
-            interactionTypeId = "&interaction_type_id=1000",
-            interactionSubject = "&interaction_subject=Event check-in",
-            interactionBody = "&interaction_body=" + luminate_config.interaction_body;
+    $scope.checkIn = function() {
 
-        $http({
-            method: 'POST',
-            url: uri + luminateServlet,
-            data: luminateMethod + postdata + interactionTypeId + interactionSubject + interactionBody + consId + sso_auth_token,
-            headers: header
-        }).then(function(responseData) {
-            //Success
-            $log.info("Log Interaction Successful for cons: " + $scope.selected.consInfo.cons_id);
-            $log.info(responseData);
-            var checkin_success = document.getElementById("checkin-success");
-            checkin_success.classList.add("fadeIn");
-            setTimeout(function() {
-                checkin_success.classList.remove("fadeIn");
-                $uibModalInstance.close($scope.selected);
-            }, 1000);
-            
-        }, function(responseData) {
-            //Error
-            $log.error("Log Interaction Unsuccessful");
-            $log.error(responseData);
-            alert("Session timed out. Please login.");
-            $uibModalInstance.close($scope.selected);
-            window.location.href = '#!/';
-        });
-    };
+        //Log a check-in interaction in Luminate
+        LogInteraction.log($scope.cons_id, $scope.notes);
 
-    $scope.cancel = function() {
-        $rootScope.badgeInformation = {};
-        $uibModalInstance.dismiss('cancel');
-    };
+        //Display Coney
+        $scope.coney = true;
+
+        //Return to Search
+        $timeout(function() {
+            $location.path('/search');
+        }, 1000);
+
+    }
 });

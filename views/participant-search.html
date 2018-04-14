@@ -45,7 +45,7 @@
                     </td>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="participant in searchResults | filter:searchBox | orderBy:'+lastName'  | limitTo:100" ng-click="open('lg', participant)">
+                    <tr ng-repeat="participant in searchResults | filter:searchBox | orderBy:'+lastName'  | limitTo:100" ng-click="open(participant)">
                         <td>{{participant.firstName}}</td>
                         <td>{{participant.lastName}}</td>
                         <td>{{participant.alcNumber}}</td>
