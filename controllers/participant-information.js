@@ -25,10 +25,16 @@ onlineCheckin.controller('participantInformation', function($scope, $timeout, Lo
 
     constituentService.getConsRecord($scope.cons_id).then(function(data) {
 
-        $scope.cons_info = data.data.getConsResponse;
-        var customBooleans = $scope.cons_info.custom.boolean;
-        var customStrings = $scope.cons_info.custom.string;
-        $scope.groupArray = [].concat(customBooleans, customStrings);
+        if (data) {
+            $scope.cons_info = data.data.getConsResponse;
+            var customBooleans = $scope.cons_info.custom.boolean;
+            var customStrings = $scope.cons_info.custom.string;
+            $scope.groupArray = [].concat(customBooleans, customStrings);
+        } else {
+            alert("Not connected. Refresh the page and try again.");
+            $rootScope.loggedIn = false
+            $location.path('/');
+        }
 
     });
 
@@ -44,7 +50,7 @@ onlineCheckin.controller('participantInformation', function($scope, $timeout, Lo
         //Return to Search
         $timeout(function() {
             $location.path('/search');
-        }, 3000);
+        }, 2500);
 
     }
 });

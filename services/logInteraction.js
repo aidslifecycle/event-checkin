@@ -1,4 +1,4 @@
-onlineCheckin.service('LogInteraction', function($http, $rootScope, $log) {
+onlineCheckin.service('LogInteraction', function($http, $rootScope, $log, $location) {
 
     // Simplify logging interactions in Controllers
     return {
@@ -20,8 +20,11 @@ onlineCheckin.service('LogInteraction', function($http, $rootScope, $log) {
                 $log.info("Log Interaction Successful for cons: " + cons_id);
             }, function(responseData) {
                 //Error
+
                 $log.error("Log Interaction Unsuccessful");
                 $log.error(responseData);
+                alert("Not checked-in. Refresh the page and try again.");
+                $location.path('/');
             });
         }
     }
