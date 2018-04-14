@@ -10,7 +10,7 @@ onlineCheckin.controller('participantInformation', function($scope, $timeout, Lo
     $scope.cons_id = $scope.$routeParams = $routeParams.cons_id;
 
     //@todo get ALC NUMBER
-    $scope.alcnum = "";
+    // $scope.alcnum = "";
 
     // Initialize notes field, waiver, and set Coney Success image to false
     $scope.notes = "";
@@ -26,20 +26,17 @@ onlineCheckin.controller('participantInformation', function($scope, $timeout, Lo
     constituentService.getConsRecord($scope.cons_id).then(function(data) {
 
         $scope.cons_info = data.data.getConsResponse;
-        console.log("CONS:", $scope.cons_info);
-        console.log("ROOT:", $rootScope);
-
         var customBooleans = $scope.cons_info.custom.boolean;
         var customStrings = $scope.cons_info.custom.string;
         $scope.groupArray = [].concat(customBooleans, customStrings);
-
 
     });
 
     $scope.checkIn = function() {
 
         //Log a check-in interaction in Luminate
-        LogInteraction.log($scope.cons_id, $scope.notes);
+        // The LogInteraction Service lives in js/app-checkin.js
+        LogInteraction.log($scope.cons_id, $scope.dotrNumber);
 
         //Display Coney
         $scope.coney = true;
@@ -47,7 +44,7 @@ onlineCheckin.controller('participantInformation', function($scope, $timeout, Lo
         //Return to Search
         $timeout(function() {
             $location.path('/search');
-        }, 1000);
+        }, 3000);
 
     }
 });

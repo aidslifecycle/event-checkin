@@ -28,7 +28,6 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
                 $log.info(responseData);
                 $scope.loginResponse = responseData.data.loginResponse;
                 $rootScope.sso_auth_token = $scope.loginResponse.token;
-                
                 $rootScope.loggedIn = true;
                 $rootScope.logInError = false;
                 window.location.href = '#!/search';
