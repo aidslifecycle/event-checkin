@@ -94,6 +94,12 @@ div.btn {
     color: white;
 }
 
+div.divider {
+    height: 1px;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
 .modal-header {
     border-bottom: 1px solid #e5e5e5;
     padding: 15px;
