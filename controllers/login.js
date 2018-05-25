@@ -1,7 +1,7 @@
 onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) {
 
-    $scope.username = luminate_config.username || "";
-    $scope.password = luminate_config.password || "";
+    $scope.username = window.localStorage.username || "";
+    $scope.password = window.localStorage.password || "";
 
     //ALC Options
     var header = {
@@ -31,6 +31,8 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
                 $rootScope.loggedIn = true;
                 $rootScope.logInError = false;
                 window.location.href = '#!/search';
+                window.localStorage.username = $scope.username;
+                window.localStorage.password = $scope.password;
                 
             }, function(responseData) {
                 //Error
