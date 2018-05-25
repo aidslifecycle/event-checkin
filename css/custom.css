@@ -108,6 +108,12 @@ div.alert.alert-info h4 {
     }
 }
 
+div.personal-info div.col-xs-12 {
+    border: 1px solid #414042;
+    border-radius: 4px;
+    background: #eeeeee;
+}
+
 @media (min-width: 992px) {
     div.personal-info div.col-md-4 {
         margin: 10px 0 0 15px;
@@ -204,4 +210,17 @@ div.divider {
     .panel-primary .panel-heading .searchBtn {
         width: 100%;
     }
+}
+
+/* 404 PAGE */
+.panel-danger>.panel-heading {
+    color: #eee !important;
+    background-color: #f89722;
+    border-color: #ebccd1;
+}
+
+.panel-danger img.coney {
+    width: 30%;
+    margin: 10px auto;
+    display: block;
 }
