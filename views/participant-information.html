@@ -5,8 +5,7 @@
 		    aria-hidden="true"></span>
 	</div>
 	<div class="panel-body">
-
-		<div class="row">
+		<div class="row personal-info">
 			<div class="col-xs-12">
 				<h3>Personal Information</h3>
 				<div class="divider"></div>
@@ -27,15 +26,88 @@
 			<div class="col-xs-12 col-md-4">
 				<h4>Fundraising Total:</h4>
 				<h1 class="fundraising">{{participantProgress.raised/100 | currency}}</h1>
-				<div class="col-xs-12 col-md-6">
-					<h4>Day on the Ride #:</h4>
-					<input style="width:165px" placeholder="Day on the Ride Number" ng-model="dotrNumber" type="text" minlength="4" maxlength="4"
-					    required>
-				</div>
 			</div>
 		</div>
-		<form action="">
-			<div class="row">
+		<div class="row alc-info">
+			<form class="form-horizontal">
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Type:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[0].content }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Region:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[13].content }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6" ng-if="cons_info.custom.string[0].content==='ROADIE'">
+					<div class="form-group">
+						<label>Roadie Team Assignment:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ roadieTeamAssignment }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6" ng-if="cons_info.custom.string[0].content==='ROADIE'">
+					<div class="form-group">
+						<label>Roadie Team Captain:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ roadieTeamCaptain }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Participant Number:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ alcnum }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Medical Form Complete:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ medform }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Meal Preference:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ mealPreference }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Tent Address:</label>
+						<input ng-model="tentAddress" class="form-control" ng-disabled="false" type="text" value="{{ tentAddress }}">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Tent Group:</label>
+						<input ng-model="tentKeyword" class="form-control" ng-disabled="true" type="text" value="{{ tentKeyword }}">
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<h3>Confirm Check-in</h3>
+					<div class="divider"></div>
+					<div class="checkbox">
+						<label>
+							<input ng-model="waiver" type="checkbox" value=""> Received Waiver
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input ng-model="packet" type="checkbox" value=""> Delivered Particpant Packet
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input ng-model="tentAddressConfirm" type="checkbox" value=""> Confirmed Tent Address
+						</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- End AIDS/LifeCycle Information -->
+		<div class="row">
+			<form action="">
 				<div class="col-xs-12">
 					<h3>Confirm Check-in</h3>
 					<div class="divider"></div>
@@ -52,13 +124,11 @@
 				</div>
 
 				<!-- Check-In Controls -->
-				<div class="row">
-					<div class="col-xs-12 dotr_button">
-						<br />
-						<button ng-disabled="!dotrNumberConfirmed || !waiver || dotrNumber.length !== 4" ng-click="checkIn()" class="btn btn-success part-info">CHECK-IN</button>
-					</div>
+				<div class="col-xs-12 dotr_button">
+					<br />
+					<button ng-disabled="!dotrNumberConfirmed || !waiver || dotrNumber.length !== 4" ng-click="checkIn()" class="btn btn-success part-info">CHECK-IN</button>
 				</div>
-			</div>
-		</form>
-
+			</form>
+		</div>
 	</div>
+</div>

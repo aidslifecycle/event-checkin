@@ -13,7 +13,7 @@
 }
 
 .guest-fadeIn {
-    margin-top:10px;
+    margin-top: 10px;
     margin-bottom: 10px;
     animation-name: fadeIn;
     animation-duration: 2000ms;
@@ -66,7 +66,7 @@ div.btn {
     color: #fff;
 }
 
-.navbar-inverse .navbar-nav li  a {
+.navbar-inverse .navbar-nav li a {
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -92,6 +92,32 @@ div.btn {
 
 .panel-heading>h3 {
     color: white;
+}
+
+.panel-body .row form {
+    padding: 15px;
+}
+
+div.alert.alert-info h4 {
+    margin: 0px;
+}
+
+@media (min-width: 768px) {
+    div.alc-info div.col-sm-6 {
+        padding: 0px 12% 0 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    div.personal-info div.col-md-4 {
+        margin: 10px 0 0 15px;
+        width: 33.33333333%;
+        max-width: 295px;
+        min-height: 96px;
+        border: 1px solid #414042;
+        border-radius: 4px;
+        background: #eeeeee;
+    }
 }
 
 div.divider {
@@ -123,7 +149,7 @@ div.divider {
     line-height: 0px;
     color: #45dd3b;
     text-align: center;
-    margin-top:0px;
+    margin-top: 0px;
     margin-bottom: 0px;
 }
 
