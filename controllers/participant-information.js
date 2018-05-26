@@ -35,16 +35,14 @@ onlineCheckin.controller('participantInformation', function(
 	constituentService.getConsRecord($scope.cons_id).then(function(data) {
 		if (data) {
 			// Enable tooltips
-			(($) => {
-				$('h3').css('outline', '1px solid green');
-				$('[data-toggle="tooltip"]').tooltip();
-			})(jQuery);
+			$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 			$scope.loading = false;
 			$scope.cons_info = data.data.getConsResponse;
 			var customBooleans = $scope.cons_info.custom.boolean;
 			var customStrings = $scope.cons_info.custom.string;
 			$scope.groupArray = [].concat(customBooleans, customStrings);
 			// console.table($scope.groupArray);
+			console.table($scope.cons_info.custom.string);
 		} else {
 			alert('Lost connection ☹️... Refresh the page and login again.');
 			$rootScope.loggedIn = false;
@@ -53,7 +51,6 @@ onlineCheckin.controller('participantInformation', function(
 	});
 
 	fundraisingService.getFundraisingResults($scope.cons_id).then(function(fundraisingAmount) {
-		console.log('$$$$', fundraisingAmount);
 		$scope.fundraisingResults = fundraisingAmount / 100;
 	});
 

@@ -1,8 +1,8 @@
 <div class="panel panel-primary boxShadow">
 	<div class="panel-heading">
 		<h3 style="display:inline-block">{{ cons_info.name.first + " " + cons_info.name.last}}</h3>
-		<span ng-if="coney" style="display: inline-block; float:right; font-size: 55px; color: mediumspringgreen" class="glyphicon glyphicon-ok-circle"
-		    aria-hidden="true"></span>
+		<span ng-if="coney" style="display: inline-block; font-size: 55px; color: mediumspringgreen" class="glyphicon glyphicon-ok-circle"
+		 aria-hidden="true"></span>
 	</div>
 	<div class="panel-body" ng-if="loading">
 		<div class="spinner">
@@ -11,7 +11,7 @@
 			<div class="rect3"></div>
 			<div class="rect4"></div>
 			<div class="rect5"></div>
-		  </div>
+		</div>
 	</div>
 	<div class="panel-body" ng-if="!loading">
 		<div class="row personal-info">
@@ -34,27 +34,31 @@
 			</div>
 			<div class="col-xs-12 col-md-4">
 				<h4>Fundraising Total:</h4>
-				<h1 class="fundraising" ng-class="">{{fundraisingResults | currency}}</h1>
+				<h1 class="fundraising">{{fundraisingResults | currency}}</h1>
 			</div>
 		</div>
 		<div class="row alc-info">
+			<div class="col-xs-12 title">
+				<h3>AIDS/LifeCycle 2018 Information</h3>
+				<div class="divider"></div>
+			</div>
 			<form class="form-horizontal">
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label data-toggle="tooltip" title="Hooray!">Type:</label>
+						<label data-toggle="tooltip" title="The participant should be either a Cyclist, Roadie or Staff"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Type:</label>
 						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[0].content }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label>Region:</label>
-						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[13].content }}">
+						<label data-toggle="tooltip" title="This is the region the participant is from: Northern, CA. Souther, CA. Outside of CA."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Region:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[9].content }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6" ng-if="cons_info.custom.string[0].content==='ROADIE'">
 					<div class="form-group">
-						<label>Roadie Team Assignment:</label>
-						<input class="form-control" ng-disabled="true" type="text" value="{{ roadieTeamAssignment }}">
+						<label><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Roadie Team Assignment:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[2].content }}">
 					</div>
 				</div>
 				<!-- <div class="col-xs-12 col-sm-6" ng-if="cons_info.custom.string[0].content==='ROADIE'">
@@ -65,38 +69,39 @@
 				</div> -->
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label>Participant Number:</label>
+						<label data-toggle="tooltip" title="The ID number assigned to the participant. This number should match the number on the packet and Cyclist's bike frame number."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Participant Number:</label>
 						<input class="form-control" ng-disabled="true" type="text" value="{{ alcnum }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label>Medical Form Complete:</label>
+						<label data-toggle="tooltip" title="If this box is not checked, the participant must present a slip or a stamp from the medical team."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Medical Form Complete:</label>
 						<input class="form-control" ng-disabled="true" type="text" value="{{ medform }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label>Meal Preference:</label>
-						<input class="form-control" ng-disabled="true" type="text" value="{{ mealPreference }}">
+						<label data-toggle="tooltip" title="The participant's meal preference for the week of the event."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Meal Preference:</label>
+						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[8].content }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label>Tent Address:</label>
-						<input ng-model="tentAddress" class="form-control" ng-disabled="false" type="text" value="{{ tentAddress }}">
+						<label data-toggle="tooltip" title="This number should match the tent chip in the participant's packet. It's OK to update number if incorrect or the participant wants to move. Make sure this number matches whatever tent-chip they have when they leave check-in."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Tent Address:</label>
+						<input class="form-control" ng-disabled="false" type="text" value="{{ cons_info.custom.string[7].content }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label>Tent Group:</label>
-						<input ng-model="tentKeyword" class="form-control" ng-disabled="true" type="text" value="{{ tentKeyword }}">
+						<label data-toggle="tooltip" title="This is the keyword the participant provided when they completed the tent-assignment process in their AIDS/LifeCycle account."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Tent Group:</label>
+						<input ng-model="tentKeyword" class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[11].content }}">
 					</div>
 				</div>
 				<div class="col-xs-12">
-					<h3>Confirm Check-in</h3>
+					<h3><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Confirm Check-in</h3>
 					<div class="divider"></div>
 					<div class="checkbox">
+						
 						<label>
 							<input ng-model="waiver" type="checkbox" value=""> Received Waiver
 						</label>
