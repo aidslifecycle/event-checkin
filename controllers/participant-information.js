@@ -1,56 +1,73 @@
 // Include after app module and participant-search.js
-onlineCheckin.controller('participantInformation', function($scope, $timeout, LogInteraction, constituentService, participantProgress, $http, $rootScope, $log, $routeParams, $location) {
+onlineCheckin.controller('participantInformation', function(
+	$scope,
+	$timeout,
+	LogInteraction,
+	constituentService,
+	participantProgress,
+	teamRaiserService,
+	$http,
+	$rootScope,
+	$log,
+	$routeParams,
+	$location
+) {
+	if ($rootScope.loggedIn === false) {
+		window.location.href = '#!/';
+	}
 
-    if ($rootScope.loggedIn === false) {
-        alert("You are not logged in!");
-        window.location.href = '#!/';
-    }
+	// Get the participant's Consituent ID from the URL
+	$scope.cons_id = $scope.$routeParams = $routeParams.cons_id;
 
-    // Get the participant's Consituent ID from the URL
-    $scope.cons_id = $scope.$routeParams = $routeParams.cons_id;
+	// Initialize notes field, waiver, and set Coney Success image to false
+	$scope.notes = '';
+	$scope.dotrNumber = '';
+	$scope.waiver = false;
+	$scope.donorServices;
+	$scope.dotrNumberConfirmed = '';
+	$scope.coney = false;
+	$scope.fundraisingResults = '';
 
-    //@todo get ALC NUMBER
-    // $scope.alcnum = "";
+	// Create the cons_info Object
+	$scope.cons_info = {};
+	$scope.loading = true;
 
-    // Initialize notes field, waiver, and set Coney Success image to false
-    $scope.notes = "";
-    $scope.dotrNumber = "";
-    $scope.waiver = false;
-    $scope.donorServices;
-    $scope.dotrNumberConfirmed = "";
-    $scope.coney = false;
+	constituentService.getConsRecord($scope.cons_id).then(function(data) {
+		if (data) {
+			// Enable tooltips
+			(($) => {
+				$('h3').css('outline', '1px solid green');
+				$('[data-toggle="tooltip"]').tooltip();
+			})(jQuery);
+			$scope.loading = false;
+			$scope.cons_info = data.data.getConsResponse;
+			var customBooleans = $scope.cons_info.custom.boolean;
+			var customStrings = $scope.cons_info.custom.string;
+			$scope.groupArray = [].concat(customBooleans, customStrings);
+			// console.table($scope.groupArray);
+		} else {
+			alert('Lost connection ☹️... Refresh the page and login again.');
+			$rootScope.loggedIn = false;
+			$location.path('/');
+		}
+	});
 
-    // Create the cons_info Object
-    $scope.cons_info = {};
+	teamRaiserService.getFundraisingResults($scope.cons_id).then(function(fundraisingAmount) {
+		console.log('$$$$', fundraisingAmount);
+		$scope.fundraisingResults = fundraisingAmount / 100;
+	});
 
-    constituentService.getConsRecord($scope.cons_id).then(function(data) {
+	$scope.checkIn = function() {
+		//Log a check-in interaction in Luminate
+		// The LogInteraction Service lives in js/app-checkin.js
+		LogInteraction.log($scope.cons_id, $scope.dotrNumber);
 
-        if (data) {
-            $scope.cons_info = data.data.getConsResponse;
-            var customBooleans = $scope.cons_info.custom.boolean;
-            var customStrings = $scope.cons_info.custom.string;
-            $scope.groupArray = [].concat(customBooleans, customStrings);
-        } else {
-            alert("Not connected. Refresh the page and try again.");
-            $rootScope.loggedIn = false
-            $location.path('/');
-        }
+		//Display Coney
+		$scope.coney = true;
 
-    });
-
-    $scope.checkIn = function() {
-
-        //Log a check-in interaction in Luminate
-        // The LogInteraction Service lives in js/app-checkin.js
-        LogInteraction.log($scope.cons_id, $scope.dotrNumber);
-
-        //Display Coney
-        $scope.coney = true;
-
-        //Return to Search
-        $timeout(function() {
-            $location.path('/search');
-        }, 2500);
-
-    }
+		//Return to Search
+		$timeout(function() {
+			$location.path('/search');
+		}, 2500);
+	};
 });
