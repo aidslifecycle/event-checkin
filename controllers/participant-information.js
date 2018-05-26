@@ -5,7 +5,7 @@ onlineCheckin.controller('participantInformation', function(
 	LogInteraction,
 	constituentService,
 	participantProgress,
-	teamRaiserService,
+	fundraisingService,
 	$http,
 	$rootScope,
 	$log,
@@ -52,7 +52,7 @@ onlineCheckin.controller('participantInformation', function(
 		}
 	});
 
-	teamRaiserService.getFundraisingResults($scope.cons_id).then(function(fundraisingAmount) {
+	fundraisingService.getFundraisingResults($scope.cons_id).then(function(fundraisingAmount) {
 		console.log('$$$$', fundraisingAmount);
 		$scope.fundraisingResults = fundraisingAmount / 100;
 	});

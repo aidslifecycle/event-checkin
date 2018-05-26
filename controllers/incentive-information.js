@@ -5,7 +5,7 @@ onlineCheckin.controller('participantInformation', function(
 	LogInteraction,
 	constituentService,
 	participantProgress,
-	teamRaiserService,
+	fundraisingService,
 	$http,
 	$rootScope,
 	$log,
@@ -18,7 +18,7 @@ onlineCheckin.controller('participantInformation', function(
 
 	// Get the participant's Consituent ID from the URL
 	$scope.cons_id = $scope.$routeParams = $routeParams.cons_id;
-	teamRaiserService.getTeamRaiserRegistration();
+	fundraisingService.getTeamRaiserRegistration();
 
 	//@todo get ALC NUMBER
 	// $scope.alcnum = "";

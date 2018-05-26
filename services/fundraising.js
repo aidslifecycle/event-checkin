@@ -1,4 +1,4 @@
-onlineCheckin.service('teamRaiserService', function($http, $rootScope) {
+onlineCheckin.service('fundraisingService', function($http, $rootScope) {
 	return {
 		getFundraisingResults: function(cons_id) {
 			return $http({
