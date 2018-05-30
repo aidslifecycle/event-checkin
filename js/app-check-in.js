@@ -24,8 +24,8 @@ onlineCheckin.config(function($routeProvider) {
 			controller: 'participantInformation'
 		})
 		.when('/incentives-participant/:cons_id', {
-			templateUrl: 'views/participant-information.html',
-			controller: 'incentivesInformation'
+			templateUrl: 'views/incentive-information.html',
+			controller: 'incentiveInformation'
 		})
 		.when('/rsvp', {
 			templateUrl: 'views/rsvp-search.html',
@@ -46,7 +46,7 @@ onlineCheckin.run(function($rootScope, $http, $log) {
 		'Content-Type': 'application/x-www-form-urlencoded'
 	};
 	$rootScope.uri = 'https://actnow.tofighthiv.org/site/';
-	$rootScope.postdata = '&api_key=4E7231022132358DD8&v=1.0&response_format=json';
+	$rootScope.postdata = '&api_key=' + luminate_config.api_key + '&v=1.0&response_format=json';
 	$rootScope.sso_auth_token = '';
 	$rootScope.fr_id = '2050';
 	$rootScope.loggedIn = false;
@@ -68,3 +68,5 @@ onlineCheckin.run(function($rootScope, $http, $log) {
 		}
 	);
 });
+
+var firebaseIncentives = firebase.initializeApp(fb_incentives_config, 'firebaseIncentives');

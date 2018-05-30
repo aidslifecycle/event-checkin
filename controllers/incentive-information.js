@@ -1,5 +1,5 @@
 // Include after app module and participant-search.js
-onlineCheckin.controller('participantInformation', function(
+onlineCheckin.controller('incentiveInformation', function(
 	$scope,
 	$timeout,
 	LogInteraction,
@@ -10,7 +10,8 @@ onlineCheckin.controller('participantInformation', function(
 	$rootScope,
 	$log,
 	$routeParams,
-	$location
+	$location,
+	incentivesService
 ) {
 	if ($rootScope.loggedIn === false) {
 		window.location.href = '#!/';
@@ -18,17 +19,56 @@ onlineCheckin.controller('participantInformation', function(
 
 	// Get the participant's Consituent ID from the URL
 	$scope.cons_id = $scope.$routeParams = $routeParams.cons_id;
-	fundraisingService.getTeamRaiserRegistration();
 
 	//@todo get ALC NUMBER
 	// $scope.alcnum = "";
 
+	/**
+	 * INCENTIVE KEYS:
+	 * I_15K = All types $15,000
+	 * I_10K = All types $10,000
+	 * I_5K = All types $5,000
+	 * I_C3K = Cyclist $3,000
+	 * I_R3K = Roadie $3,000
+	 * I_C1500 = Cyclist $1,500
+	 * I_R1500 = Cyclist $1,500
+	 * I_C1000 = Cyclist $1,000
+	 * I_C500 = Cyclist 500
+	 * I_R500 = Roadie 500
+	 * I_R100 = Roadie 100
+	 */
+
+	$scope.incentiveDisplay = {};
+	$scope.top545Display = {};
+	$scope.top50Display = {};
+
+	$scope.incentives = incentivesService.getIncentives($scope.cons_id);
+	$scope.top545 = incentivesService.getTop545($scope.cons_id);
+	$scope.top50 = incentivesService.getTop50($scope.cons_id);
+
+	$scope.incentives.on('value', function(snapshot) {
+		$scope.$apply(function() {
+			$scope.incentiveDisplay = snapshot.val();
+			console.log('Incentives: ', $scope.incentiveDisplay);
+		});
+	});
+
+	$scope.top545.on('value', function(snapshot) {
+		$scope.$apply(function() {
+			$scope.top545Display = snapshot.val();
+			console.log('Top 545:', $scope.top545Display);
+		});
+	});
+
+	$scope.top50.on('value', function(snapshot) {
+		$scope.$apply(function() {
+			$scope.top50Display = snapshot.val();
+			console.log('Top 50: ', $scope.top50Display);
+		});
+	});
+
 	// Initialize notes field, waiver, and set Coney Success image to false
 	$scope.notes = '';
-	$scope.dotrNumber = '';
-	$scope.waiver = false;
-	$scope.donorServices;
-	$scope.dotrNumberConfirmed = '';
 	$scope.coney = false;
 
 	// Create the cons_info Object
