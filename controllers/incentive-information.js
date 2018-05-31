@@ -20,6 +20,11 @@ onlineCheckin.controller('incentiveInformation', function(
 	// Get the participant's Consituent ID from the URL
 	$scope.cons_id = $scope.$routeParams = $routeParams.cons_id;
 
+	// Create the cons_info Object
+	$scope.cons_info = {};
+	$scope.part_type = '';
+	$scope.loading = true;
+
 	//@todo get ALC NUMBER
 	// $scope.alcnum = "";
 
@@ -41,27 +46,31 @@ onlineCheckin.controller('incentiveInformation', function(
 	$scope.incentiveDisplay = {};
 	$scope.top545Display = {};
 	$scope.top50Display = {};
+	$scope.fundraisingResults = '';
 
 	$scope.incentives = incentivesService.getIncentives($scope.cons_id);
 	$scope.top545 = incentivesService.getTop545($scope.cons_id);
 	$scope.top50 = incentivesService.getTop50($scope.cons_id);
 
+	fundraisingService.getFundraisingResults($scope.cons_id).then(function(fundraisingAmount) {
+		$scope.fundraisingResults = fundraisingAmount;
+	});
+
 	$scope.incentives.on('value', function(snapshot) {
-		$scope.$apply(function() {
+		$timeout(function() {
 			$scope.incentiveDisplay = snapshot.val();
-			console.log('Incentives: ', $scope.incentiveDisplay);
 		});
 	});
 
 	$scope.top545.on('value', function(snapshot) {
-		$scope.$apply(function() {
+		$timeout(function() {
 			$scope.top545Display = snapshot.val();
 			console.log('Top 545:', $scope.top545Display);
 		});
 	});
 
 	$scope.top50.on('value', function(snapshot) {
-		$scope.$apply(function() {
+		$timeout(function() {
 			$scope.top50Display = snapshot.val();
 			console.log('Top 50: ', $scope.top50Display);
 		});
@@ -71,15 +80,11 @@ onlineCheckin.controller('incentiveInformation', function(
 	$scope.notes = '';
 	$scope.coney = false;
 
-	// Create the cons_info Object
-	$scope.cons_info = {};
-	$scope.loading = true;
-
 	constituentService.getConsRecord($scope.cons_id).then(function(data) {
 		if (data) {
 			$scope.loading = false;
 			$scope.cons_info = data.data.getConsResponse;
-			console.log($scope.cons_info);
+			$scope.part_type = $scope.cons_info.custom.string[0].content.toLowerCase();
 			var customBooleans = $scope.cons_info.custom.boolean;
 			var customStrings = $scope.cons_info.custom.string;
 			$scope.groupArray = [].concat(customBooleans, customStrings);
