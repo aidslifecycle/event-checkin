@@ -1,4 +1,4 @@
-/js/participants.json
+/js/participants*.json
 /config/luminate.config.js
 node_modules/
 old-fb-data/*.json
