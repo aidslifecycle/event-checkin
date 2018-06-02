@@ -302,3 +302,8 @@ div.incentiveItem h4 {
 div.incentiveItem select {
 	float: right;
 }
+
+span.success-check {
+	font-size: 68px;
+	color: limegreen;
+}

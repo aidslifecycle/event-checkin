@@ -1,8 +1,6 @@
 <div class="panel panel-primary boxShadow">
 	<div class="panel-heading">
 		<h3 style="display:inline-block">{{ cons_info.name.first + " " + cons_info.name.last}}</h3>
-		<span ng-if="coney" style="display: inline-block; font-size: 55px; color: mediumspringgreen" class="glyphicon glyphicon-ok-circle"
-		 aria-hidden="true"></span>
 	</div>
 	<div class="panel-body" ng-if="loading">
 		<div class="spinner">
@@ -64,24 +62,18 @@
 						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[2].content }}">
 					</div>
 				</div>
-				<!-- <div class="col-xs-12 col-sm-6" ng-if="cons_info.custom.string[0].content=='ROADIE'">
-					<div class="form-group">
-						<label>Roadie Team Captain:</label>
-						<input class="form-control" ng-disabled="true" type="text" value="{{ roadieTeamCaptain }}">
-					</div>
-				</div> -->
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
 						<label data-toggle="tooltip" title="The ID number assigned to the participant. This number should match the number on the packet and Cyclist's bike frame number.">
 							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Participant Number:</label>
-						<input class="form-control" ng-disabled="true" type="text" value="{{ alcnum }}">
+						<input class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[5].content }}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
 						<label data-toggle="tooltip" title="If this box is not checked, the participant must present a slip or a stamp from the medical team.">
 							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Medical Form Complete:</label>
-						<input class="form-control" ng-disabled="true" type="text" value="{{ medform }}">
+						<input class="form-control" ng-disabled="true" type="text" value={{medform}}>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
@@ -95,67 +87,41 @@
 					<div class="form-group">
 						<label data-toggle="tooltip" title="This number should match the tent chip in the participant's packet. It's OK to update number if incorrect or the participant wants to move. Make sure this number matches whatever tent-chip they have when they leave check-in.">
 							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Tent Address:</label>
-						<input class="form-control" ng-disabled="false" type="text" value="{{ cons_info.custom.string[7].content }}">
+						<input class="form-control" type="text" ng-model="tentAddress" id="tentAddress">
 					</div>
 				</div>
-				<!-- <div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label data-toggle="tooltip" title="This is the keyword the participant provided when they completed the tent-assignment process in their AIDS/LifeCycle account."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Tent Group:</label>
-						<input ng-model="tentKeyword" class="form-control" ng-disabled="true" type="text" value="{{ cons_info.custom.string[11].content }}">
-					</div>
-				</div> -->
-				<div class="col-xs-12">
+				<div class=" col-xs-12 ">
 					<h3>
-						<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Confirm Check-in</h3>
-					<div class="divider"></div>
+						<span class="glyphicon glyphicon-info-sign " aria-hidden="true "></span> Confirm Check-in</h3>
+					<div class="divider "></div>
 					<div class="checkbox">
-
 						<label>
-							<input ng-model="waiver" type="checkbox" value=""> Received signed waiver.
+							<input ng-model="waiver " type="checkbox"> Received signed waiver.
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input ng-model="packet" type="checkbox" value=""> Delivered particpant packet
+							<input ng-model="packet " type="checkbox"> Delivered particpant packet
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input ng-model="tentAddressConfirm" type="checkbox" value=""> Confirmed Tent Address
-						</label>
-					</div>
-					<div class="checkbox">
-						<label>
-							<input ng-model="tentAddressConfirm" type="checkbox" value=""> Confirmed Tent Address
+							<input ng-model="tentAddressConfirm " type="checkbox"> Confirmed Tent Address
 						</label>
 					</div>
 				</div>
 			</form>
 		</div>
 		<!-- End AIDS/LifeCycle Information -->
-		<div class="row">
-			<form action="">
-				<!-- HIDE DOTR CHECKIN CONTROLS -->
-				<!-- @todo fix this after Day -->
-				<!-- <div class="col-xs-12">
-					<h3>Confirm Check-in</h3>
-					<div class="divider"></div>
-					<div class="checkbox">
-						<label>
-							<input ng-model="waiver" type="checkbox" value=""> Received Waiver
-						</label>
-					</div>
-					<div class="checkbox">
-						<label>
-							<input ng-model="dotrNumberConfirmed" type="checkbox" value=""> Confirmed DOTR #
-						</label>
-					</div>
-				</div> -->
-
+		<div class="row ">
+			<form action=" ">
 				<!-- DAY ZERO CHECKIN CONTROLS -->
-				<div class="col-xs-12 dotr_button">
+				<div class="col-xs-12 dotr_button" ng-if="!success">
 					<br />
-					<button ng-disabled="!dotrNumberConfirmed || !waiver || dotrNumber.length !== 4" ng-click="checkIn()" class="btn btn-success part-info">CHECK-IN</button>
+					<button ng-disabled="!tentAddressConfirm || !packet || !waiver || tentAddress.length < 2" ng-click="checkIn() " class="btn btn-success part-info ">CHECK-IN</button>
+				</div>
+				<div class="col-xs-12" ng-if="success">
+					<span class="glyphicon glyphicon-ok-circle success-check" aria-hidden="true"></span>
 				</div>
 			</form>
 		</div>

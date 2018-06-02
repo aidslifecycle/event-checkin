@@ -70,3 +70,4 @@ onlineCheckin.run(function($rootScope, $http, $log) {
 });
 
 var firebaseIncentives = firebase.initializeApp(fb_incentives_config, 'firebaseIncentives');
+var firebaseCheckin = firebase.initializeApp(fb_incentives_checkin, 'firebaseCheckin');
