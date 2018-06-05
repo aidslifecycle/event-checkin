@@ -2,7 +2,6 @@
 onlineCheckin.controller('participantSearch', function($scope, $log, $http, $rootScope, $location, $routeParams) {
 
     if ($rootScope.loggedIn === false) {
-        alert("You are not logged in!");
         window.location.href = '#!/';
     }
 
@@ -20,10 +19,8 @@ onlineCheckin.controller('participantSearch', function($scope, $log, $http, $roo
 
     $scope.open = function(participant) {
 
-        console.log(participant);
-
         //Opens a page with the Participant's infp form the Convio Constituent Profile
-        $location.path('participant/' + participant.consId);
+        $location.path('checkin-participant/' + participant.consId);
 
     }; //End open function
 
