@@ -1,4 +1,5 @@
 //Include after app-check-in.js
+// @ts-ignore
 onlineCheckin.controller('participantSearch', function($scope, $log, $http, $rootScope, $location, $routeParams) {
 
     if ($rootScope.loggedIn === false) {

@@ -48,7 +48,7 @@ onlineCheckin.controller('rsvpSearch', function ($scope, $log, $http, $rootScope
         console.log("RSVP PART",participant);
 
         //Opens a page with the Participant's infp form the Convio Constituent Profile
-        $location.path('participant/' + participant.cons_id);
+        $location.path('checkin-participant/' + participant.cons_id);
 
     }; //End open function
 

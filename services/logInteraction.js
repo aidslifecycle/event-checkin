@@ -59,8 +59,8 @@ onlineCheckin.service('LogFirebase', function($http, $rootScope, $log, $location
 				.update(
 					{
 						email: email,
-						tent: tent,
-						fundraising: fundraising,
+						// tent: tent,
+						// fundraising: fundraising,
 						time: Date()
 					},
 					function(error) {

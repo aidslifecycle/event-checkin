@@ -1,3 +1,4 @@
+// @ts-ignore
 onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) {
 	$scope.username = window.localStorage.username || '';
 	$scope.password = window.localStorage.password || '';

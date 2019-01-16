@@ -1,3 +1,4 @@
+// @ts-ignore
 onlineCheckin.controller('guestInformation', function($rootScope, $scope, $http, $log) {
 
     if ($rootScope.loggedIn === false) {
@@ -11,9 +12,7 @@ onlineCheckin.controller('guestInformation', function($rootScope, $scope, $http,
 
         if (newValues[0] !== undefined && newValues[1] !== undefined && newValues[3] !== undefined) {
 
-
             $rootScope.badgeInformation = {
-
                 firstName: $scope.guest.firstName,
                 lastName: $scope.guest.lastName,
                 partType: "Guest",
@@ -21,7 +20,6 @@ onlineCheckin.controller('guestInformation', function($rootScope, $scope, $http,
                 isTeamCaptain: true,
                 isRoadieCaption: false,
                 roadieTeamAssignment: null
-
             };
 
             $scope.printButton = true;
@@ -69,7 +67,4 @@ onlineCheckin.controller('guestInformation', function($rootScope, $scope, $http,
         });
 
     }
-
-
-
 });

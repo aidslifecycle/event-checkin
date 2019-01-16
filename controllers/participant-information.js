@@ -1,4 +1,5 @@
 // Include after app module and participant-search.js
+// @ts-ignore
 onlineCheckin.controller('participantInformation', function(
 	$scope,
 	$timeout,
@@ -67,16 +68,18 @@ onlineCheckin.controller('participantInformation', function(
 	});
 
 	$scope.checkIn = function() {
-		var tent_address = document.getElementById('tentAddress').value;
-		$scope.notes =
-			'Wavier received: ' +
-			$scope.medform +
-			' | ' +
-			'Fundraising amount: ' +
-			$scope.fundraisingResults +
-			' | ' +
-			'Tent Address: ' +
-			tent_address;
+		// var tent_address = document.getElementById('tentAddress').value || null;
+		// $scope.notes =
+		// 	'Wavier received: ' +
+		// 	$scope.medform +
+		// 	' | ' +
+		// 	'Fundraising amount: ' +
+		// 	$scope.fundraisingResults +
+		// 	' | ' +
+		// 	'Tent Address: ' +
+		// 	tent_address;
+
+		$scope.notes = 'Checked-in';
 
 		// Submit a check-in interaction in Luminate Online, Firebase and Local Storage
 		LogInteraction.submit($scope.cons_id, $scope.notes);
@@ -84,14 +87,14 @@ onlineCheckin.controller('participantInformation', function(
 		LogFirebase.submit(
 			$scope.cons_id,
 			$scope.cons_info.email.primary_address,
-			tent_address,
-			$scope.fundraisingResults
+			// tent_address,
+			// $scope.fundraisingResults
 		);
 
-		console.log('Notes:', $scope.notes);
-		console.log('Waiver:', $scope.waiver);
-		console.log('Fundraising', $scope.fundraisingResults);
-		console.log('Tent Address', document.getElementById('tentAddress').value);
+		// console.log('Notes:', $scope.notes);
+		// console.log('Waiver:', $scope.waiver);
+		// console.log('Fundraising', $scope.fundraisingResults);
+		// console.log('Tent Address', document.getElementById('tentAddress').value);
 
 		// Display Coney
 		$scope.success = true;
@@ -99,6 +102,7 @@ onlineCheckin.controller('participantInformation', function(
 		//Return to Search
 		$timeout(function() {
 			$location.path($rootScope.searchRoute);
+			console.log('search route', $rootScope.searchRoute);
 		}, 2500);
 	};
 });
