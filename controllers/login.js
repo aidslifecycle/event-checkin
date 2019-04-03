@@ -24,13 +24,13 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
 		}).then(
 			function(responseData) {
 				//Success
+				window.localStorage.username = $scope.username;
+				window.localStorage.password = $scope.password;
 				$scope.loginResponse = responseData.data.loginResponse;
 				$rootScope.sso_auth_token = $scope.loginResponse.token;
 				$rootScope.loggedIn = true;
 				$rootScope.logInError = false;
 				window.location.href = '#!/checkin-search';
-				window.localStorage.username = $scope.username;
-				window.localStorage.password = $scope.password;
 			},
 			function(responseData) {
 				//Error
