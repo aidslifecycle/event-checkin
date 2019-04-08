@@ -307,3 +307,7 @@ span.success-check {
 	font-size: 68px;
 	color: limegreen;
 }
+
+input[data='dotr-number'] {
+	max-width: 200px;
+}

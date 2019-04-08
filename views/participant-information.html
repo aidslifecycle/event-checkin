@@ -57,7 +57,7 @@
 							value="{{ dotrNumber }}"
 							minlength="4"
 							maxlength="4"
-							required
+							data="dotr-number"
 						/>
 					</div>
 				</div>
@@ -89,7 +89,7 @@
 					<br />
 					<!-- UNCOMMENT THIS LINE AT O-DAY -->
 					<button
-						ng-disabled="!dotrNumberConfirmed || dotrNumber.length < 4"
+						ng-disabled="!check(dotrNumberConfirmed, dotrNumber)"
 						ng-click="checkIn() "
 						class="btn btn-success part-info "
 					>

@@ -3,15 +3,13 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
 	$scope.username = window.localStorage.username || '';
 	$scope.password = window.localStorage.password || '';
 
-	//ALC Options
-	var header = {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		},
-		uri = 'https://actnow.tofighthiv.org/site/',
-		postdata = '&api_key=' + luminate_config.api_key + '&v=1.0&response_format=json';
-
 	$scope.loginSubmit = function() {
-		var luminateServlet = 'CRConsAPI',
+		//ALC Options
+		let header = { 'Content-Type': 'application/x-www-form-urlencoded' },
+			uri = 'https://actnow.tofighthiv.org/site/',
+			// @ts-ignore
+			postdata = '&api_key=' + luminate_config.api_key + '&v=1.0&response_format=json';
+		let luminateServlet = 'CRConsAPI',
 			luminateMethod = 'method=login',
 			username = '&user_name=' + $scope.username,
 			password = '&password=' + $scope.password;

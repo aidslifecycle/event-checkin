@@ -37,7 +37,13 @@ onlineCheckin.controller('participantInformation', function(
 
 	$scope.$watch('dotrNumber', function(val) {
 		console.log(val);
+		console.log('dotrNumber', $scope.dotrNumber.length);
 	});
+
+	$scope.check = function(checkbox, number) {
+		console.log({ checkbox, number });
+		return !!checkbox && number.length === 4;
+	};
 
 	constituentService.getConsRecord($scope.cons_id).then(function(data) {
 		if (data) {
