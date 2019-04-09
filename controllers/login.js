@@ -1,16 +1,15 @@
-onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) {
+// @ts-ignore
+onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope, $location) {
 	$scope.username = window.localStorage.username || '';
 	$scope.password = window.localStorage.password || '';
 
-	//ALC Options
-	var header = {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		},
-		uri = 'https://actnow.tofighthiv.org/site/',
-		postdata = '&api_key=' + luminate_config.api_key + '&v=1.0&response_format=json';
-
 	$scope.loginSubmit = function() {
-		var luminateServlet = 'CRConsAPI',
+		//ALC Options
+		let header = { 'Content-Type': 'application/x-www-form-urlencoded' },
+			uri = 'https://actnow.tofighthiv.org/site/',
+			// @ts-ignore
+			postdata = '&api_key=' + luminate_config.api_key + '&v=1.0&response_format=json';
+		let luminateServlet = 'CRConsAPI',
 			luminateMethod = 'method=login',
 			username = '&user_name=' + $scope.username,
 			password = '&password=' + $scope.password;
@@ -23,13 +22,14 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
 		}).then(
 			function(responseData) {
 				//Success
+				window.localStorage.username = $scope.username;
+				window.localStorage.password = $scope.password;
 				$scope.loginResponse = responseData.data.loginResponse;
 				$rootScope.sso_auth_token = $scope.loginResponse.token;
 				$rootScope.loggedIn = true;
 				$rootScope.logInError = false;
-				window.location.href = determineAdminRoute($scope.username, $rootScope);
-				window.localStorage.username = $scope.username;
-				window.localStorage.password = $scope.password;
+				$rootScope.searchRoute = '/checkin-search';
+				$location.path($rootScope.searchRoute);
 			},
 			function(responseData) {
 				//Error
@@ -41,19 +41,3 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
 		);
 	}; //end loginSubmit
 });
-
-function determineAdminRoute(username, rootScope) {
-	var incentives = username.indexOf('incentive');
-	var checkin = username.indexOf('checkin');
-	var master = username.indexOf('master');
-	var hash = '#!';
-	if (incentives > -1) {
-		rootScope.searchRoute = '/incentive-search';
-		return hash + rootScope.searchRoute;
-	} else if (checkin > -1) {
-		rootScope.searchRoute = '/checkin-search';
-		return hash + rootScope.searchRoute;
-	} else {
-		('/');
-	}
-}

@@ -48,7 +48,7 @@ onlineCheckin.run(function($rootScope, $http, $log) {
 	$rootScope.uri = 'https://actnow.tofighthiv.org/site/';
 	$rootScope.postdata = '&api_key=' + luminate_config.api_key + '&v=1.0&response_format=json';
 	$rootScope.sso_auth_token = '';
-	$rootScope.fr_id = '2050';
+	$rootScope.fr_id = '2110';
 	$rootScope.loggedIn = false;
 	$rootScope.logInError = false;
 	$rootScope.teamRaiserData = {};
