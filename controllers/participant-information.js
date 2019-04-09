@@ -55,8 +55,8 @@ onlineCheckin.controller('participantInformation', function(
 		} else {
 			alert('Lost connection! Refresh the page and login again.');
 			$scope.loading = false;
-			//$rootScope.loggedIn = false;
-			//$location.path('/');
+			$rootScope.loggedIn = false;
+			$location.path('/');
 		}
 	});
 
@@ -64,13 +64,14 @@ onlineCheckin.controller('participantInformation', function(
 		$scope.fundraisingResults = fundraisingAmount / 100;
 	});
 
-	$scope.checkIn = function() {
-		$scope.notes = 'Day on the Ride number: ' + $scope.dotrNumber;
+	$scope.checkIn = function(dotrNumber) {
+		$scope.notes = 'Day on the Ride number: ' + dotrNumber;
 
 		// Submit a check-in interaction in Luminate Online, Firebase and Local Storage
 		LogInteraction.submit($scope.cons_id, $scope.notes);
 		LogLocalStorage.submit($scope.cons_id, $scope.notes);
-		LogFirebase.submit($scope.cons_id, $scope.cons_info.email.primary_address, $scope.dotrNumber);
+		LogFirebase.submit($scope.cons_id, $scope.cons_info.email.primary_address, dotrNumber);
+		console.info($scope.cons_id, $scope.cons_info.email.primary_address, dotrNumber);
 
 		// Display Coney
 		$scope.success = true;
@@ -78,7 +79,6 @@ onlineCheckin.controller('participantInformation', function(
 		//Return to Search
 		$timeout(function() {
 			$location.path($rootScope.searchRoute);
-			console.log('search route', $rootScope.searchRoute);
 		}, 2500);
 	};
 });
