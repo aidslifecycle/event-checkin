@@ -37,12 +37,13 @@ onlineCheckin.controller('participantInformation', function(
 
 	$scope.$watch('dotrNumber', function(val) {
 		console.log(val);
-		console.log('dotrNumber', $scope.dotrNumber.length);
 	});
 
-	$scope.check = function(checkbox, number) {
-		console.log({ checkbox, number });
-		return !!checkbox && number.length === 4;
+	// Assigned to the ng-disabled selector on the submit button
+	// Checks the length of the Day On The Ride number and if the
+	// Confirmation buttons have been checked.
+	$scope.check = function(checkbox, num) {
+		return checkbox && num.length === 4;
 	};
 
 	constituentService.getConsRecord($scope.cons_id).then(function(data) {
@@ -64,11 +65,6 @@ onlineCheckin.controller('participantInformation', function(
 	});
 
 	$scope.checkIn = function() {
-		if ($scope.dotrNumber.length) {
-			alert('Please enter a 4 digit Day on The Ride number.');
-			return;
-		}
-
 		$scope.notes = 'Day on the Ride number: ' + $scope.dotrNumber;
 
 		// Submit a check-in interaction in Luminate Online, Firebase and Local Storage
