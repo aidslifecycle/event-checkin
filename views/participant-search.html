@@ -11,20 +11,20 @@
                     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Search for a participant or narrow the results by using any of the fields below.</h4>
             </div>
             <div class="col-sm-6">
-                <input id="firstName" type="text" class="form-control input-lg" placeholder="First Name" ng-model="searchBox.firstName" name="searchBox.firstName"
+                <input id="firstName" type="text" class="form-control input-lg" placeholder="First Name" ng-model="searchBox.first" name="searchBox.first"
                     required minlength="1">
             </div>
             <div class="col-sm-6">
-                <input id="lastName" type="text" class="form-control input-lg" placeholder="Last Name" ng-model="searchBox.lastName" name="searchBox.lastName"
+                <input id="lastName" type="text" class="form-control input-lg" placeholder="Last Name" ng-model="searchBox.last" name="searchBox.last"
                     required minlength="1">
             </div>
             <!-- TEAM AND PARTICIPANT NUMBER -->
             <div class="col-sm-6">
-                <input id="alcNumber" type="number" class="form-control input-lg" placeholder="AIDS/LifeCycle Number" ng-model="searchBox.alcNumber"
-                    name="searchBox.alcNumber" required minlength="1">
+                <input id="alcNumber" type="number" class="form-control input-lg" placeholder="AIDS/LifeCycle Number" ng-model="searchBox.alcnum"
+                    name="searchBox.alcnum" required minlength="1">
             </div>
             <div class="col-sm-6">
-                <input id="teamName" type="text" class="form-control input-lg" placeholder="Team Name" ng-model="searchBox.teamName" name="searchBox.teamName"
+                <input id="teamName" type="text" class="form-control input-lg" placeholder="Team Name" ng-model="searchBox.team" name="searchBox.team"
                     required minlength="1">
             </div>
         </form>
@@ -52,12 +52,12 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="participant in searchResults | filter:searchBox | orderBy:'+lastName'  | limitTo:100" ng-click="open(participant)">
-                        <td>{{participant.firstName}}</td>
-                        <td>{{participant.lastName}}</td>
-                        <td>{{participant.alcNumber}}</td>
-                        <td>{{participant.teamName}}</td>
-                        <td>{{participant.partType}}</td>
-                        <td>{{participant.partCity}}</td>
+                        <td>{{participant.first}}</td>
+                        <td>{{participant.last}}</td>
+                        <td>{{participant.alcnum}}</td>
+                        <td>{{participant.team}}</td>
+                        <td>{{participant.type}}</td>
+                        <td>{{participant.city}}</td>
                     </tr>
                 </tbody>
             </table>
