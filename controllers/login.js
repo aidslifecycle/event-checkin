@@ -1,4 +1,4 @@
-onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) {
+onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope, $location) {
 	$scope.username = window.localStorage.username || '';
 	$scope.password = window.localStorage.password || '';
 
@@ -27,7 +27,8 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
 				$rootScope.sso_auth_token = $scope.loginResponse.token;
 				$rootScope.loggedIn = true;
 				$rootScope.logInError = false;
-				window.location.href = determineAdminRoute($scope.username, $rootScope);
+				$rootScope.searchRoute = '/checkin-search';
+				$location.path($rootScope.searchRoute);
 				window.localStorage.username = $scope.username;
 				window.localStorage.password = $scope.password;
 			},
@@ -41,19 +42,3 @@ onlineCheckin.controller('loginCtrl', function($scope, $log, $http, $rootScope) 
 		);
 	}; //end loginSubmit
 });
-
-function determineAdminRoute(username, rootScope) {
-	var incentives = username.indexOf('incentive');
-	var checkin = username.indexOf('checkin');
-	var master = username.indexOf('master');
-	var hash = '#!';
-	if (incentives > -1) {
-		rootScope.searchRoute = '/incentive-search';
-		return hash + rootScope.searchRoute;
-	} else if (checkin > -1) {
-		rootScope.searchRoute = '/checkin-search';
-		return hash + rootScope.searchRoute;
-	} else {
-		('/');
-	}
-}
