@@ -7,6 +7,7 @@ onlineCheckin.controller('participantInformation', function(
 	LogFirebase,
 	constituentService,
 	participantProgress,
+	tentAddressService,
 	fundraisingService,
 	$http,
 	$rootScope,
@@ -40,6 +41,8 @@ onlineCheckin.controller('participantInformation', function(
 	$scope.$watch('tentAddress', function(val) {
 		console.log(val);
 	});
+
+	console.log(tentAddressService.getTentAddress());
 
 	constituentService.getConsRecord($scope.cons_id).then(function(data) {
 		if (data) {
