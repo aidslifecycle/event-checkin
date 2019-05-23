@@ -69,5 +69,15 @@ onlineCheckin.run(function($rootScope, $http, $log) {
 	);
 });
 
+window.addEventListener(
+	'offline',
+	function(e) {
+		alert(
+			"The computer has lost connection to the Internet. If you can't reconnect, please ask a staff member for help"
+		);
+	},
+	false
+);
+
 var firebaseIncentives = firebase.initializeApp(fb_incentives_config, 'firebaseIncentives');
 var firebaseCheckin = firebase.initializeApp(fb_incentives_checkin, 'firebaseCheckin');
