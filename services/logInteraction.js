@@ -1,4 +1,3 @@
-// @ts-ignore
 onlineCheckin.service('LogInteraction', function($http, $rootScope, $log, $location) {
 	// Simplify logging interactions in Controllers
 	return {
@@ -25,7 +24,6 @@ onlineCheckin.service('LogInteraction', function($http, $rootScope, $log, $locat
 					this.sso_auth_token,
 				headers: $rootScope.header
 			}).then(
-				// @ts-ignore
 				function(responseData) {
 					//Success
 					$log.info('Log Interaction Successful for cons: ' + cons_id);
@@ -52,11 +50,12 @@ onlineCheckin.service('LogLocalStorage', function($http, $rootScope, $log, $loca
 		}
 	};
 });
+
 // @ts-ignore
 onlineCheckin.service('LogFirebase', function($http, $rootScope, $log, $location) {
 	// Simplify logging interactions in Controllers
 	return {
-		submit: function(cons_id, email, dotrNumber) {
+		submit: function(cons_id, email, tent, fundraising) {
 			// @ts-ignore
 			firebaseCheckin
 				.database()
@@ -64,7 +63,8 @@ onlineCheckin.service('LogFirebase', function($http, $rootScope, $log, $location
 				.update(
 					{
 						email: email,
-						dotrNumber: dotrNumber,
+						tent: tent,
+						fundraising: fundraising,
 						time: Date()
 					},
 					function(error) {

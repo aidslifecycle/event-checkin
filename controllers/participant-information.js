@@ -84,7 +84,7 @@ onlineCheckin.controller('participantInformation', function(
 	});
 
 	$scope.checkIn = function() {
-		var tent_address = document.getElementById('tentAddress').value;
+		$scope.$digest();
 		$scope.notes =
 			'Wavier received: ' +
 			$scope.medform +
@@ -93,7 +93,7 @@ onlineCheckin.controller('participantInformation', function(
 			$scope.fundraisingResults +
 			' | ' +
 			'Tent Address: ' +
-			tent_address;
+			$scope.tentAddress;
 
 		// Submit a check-in interaction in Luminate Online, Firebase and Local Storage
 		LogInteraction.submit($scope.cons_id, $scope.notes);
@@ -101,14 +101,14 @@ onlineCheckin.controller('participantInformation', function(
 		LogFirebase.submit(
 			$scope.cons_id,
 			$scope.cons_info.email.primary_address,
-			tent_address,
+			$scope.tentAddress,
 			$scope.fundraisingResults
 		);
 
 		console.log('Notes:', $scope.notes);
 		console.log('Waiver:', $scope.waiver);
 		console.log('Fundraising', $scope.fundraisingResults);
-		console.log('Tent Address', document.getElementById('tentAddress').value);
+		console.log('Tent Address', $scope.tentAddress);
 
 		// Display Coney
 		$scope.success = true;
@@ -116,6 +116,6 @@ onlineCheckin.controller('participantInformation', function(
 		//Return to Search
 		$timeout(function() {
 			$location.path($rootScope.searchRoute);
-		}, 2500);
+		}, 3000);
 	};
 });
