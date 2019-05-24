@@ -1,6 +1,15 @@
 <div class="panel panel-primary boxShadow">
 	<div class="panel-heading">
-		<h3 style="display:inline-block">{{ cons_info.name.first + ' ' + cons_info.name.last }}</h3>
+		<h3 ng-if="!loading" style="display: flex; align-items: center; margin: 12px 0;">
+			<span
+				>{{ cons_info.name.first + ' ' + cons_info.name.last }} |
+				{{ cons_info.primary_address.city }}, {{ cons_info.primary_address.state }}</span
+			>
+			<span
+				style="margin-left: auto; border-radius: 4px; background: white; color: black; padding: 12px;"
+				>{{ fundraisingResults | currency }}</span
+			>
+		</h3>
 	</div>
 	<div class="panel-body" ng-if="loading">
 		<div class="spinner">
@@ -12,159 +21,77 @@
 		</div>
 	</div>
 	<div class="panel-body" ng-if="!loading">
-		<div class="row personal-info">
-			<div class="col-xs-12 title">
-				<h3>Participant Information</h3>
-				<div class="divider"></div>
-			</div>
-
-			<div class="col-xs-12 col-md-4">
-				<h4>{{ cons_info.name.first + ' ' + cons_info.name.last }}</h4>
-				<h5>{{ cons_info.email.primary_address }}</h5>
-				<h5>{{ cons_info.home_phone | tel }}</h5>
-			</div>
-
-			<div class="col-xs-12 col-md-4">
-				<h4>Address:</h4>
-				<h5>{{ cons_info.primary_address.street1 }}</h5>
-				<h5>{{ cons_info.primary_address.street2 }}</h5>
-				<h5>
-					{{ cons_info.primary_address.city }}, {{ cons_info.primary_address.state }},
-					{{ cons_info.primary_address.zip }}
-				</h5>
-			</div>
-			<div class="col-xs-12 col-md-4">
-				<h4>Fundraising Total:</h4>
-				<h1 class="fundraising">{{ fundraisingResults | currency }}</h1>
-			</div>
-		</div>
+		<h3 class="intro">
+			Please review the information below. It's very important you review each step. Use the
+			check-in button at the bottom of the page to complete the process.
+		</h3>
+		<div class="divider"></div>
 		<div class="row alc-info">
-			<div class="col-xs-12 title">
-				<h3>AIDS/LifeCycle 2019 Information</h3>
-				<div class="divider"></div>
-			</div>
-			<form class="form-horizontal">
-				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label
-							data-toggle="tooltip"
-							title="The participant should be either a Cyclist, Roadie or Staff"
-						>
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Type:</label
-						>
-						<input
-							class="form-control"
-							ng-disabled="true"
-							type="text"
-							value="{{ cons_info.custom.string[0].content }}"
-						/>
-					</div>
+			<form class="form-horizontal" action=" ">
+				<div class="col-xs-12 step step-1 remove-padding">
+					<p>
+						<span class="step-bubble">Step 1</span> {{ cons_info.name.first }} is a
+						<span>{{ cons_info.custom.string[17].content }}</span
+						>. They are is assigned to number <span>{{ cons_info.custom.string[5].content }}</span
+						>. Take {{ cons_info.name.first }}'s signed waiver and send a runner to find a packet
+						with their number.
+					</p>
+					<div class="divider divider-margin"></div>
 				</div>
-				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label
-							data-toggle="tooltip"
-							title="This is the region the participant is from: Northern, CA. Souther, CA. Outside of CA."
-						>
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Region:</label
-						>
-						<input
-							class="form-control"
-							ng-disabled="true"
-							type="text"
-							value="{{ cons_info.custom.string[9].content }}"
-						/>
-					</div>
+				<div class="col-xs-12 step step-2 remove-padding">
+					<p><span class="step-bubble">Step 2</span> {{ medform }}</p>
+					<div class="divider divider-margin"></div>
 				</div>
-				<div class="col-xs-12 col-sm-6" ng-if="cons_info.custom.string[0].content=='ROADIE'">
-					<div class="form-group">
-						<label>
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Roadie Team
-							Assignment:</label
+				<div class="col-xs-12 step step-2 remove-padding">
+					<p>
+						<span class="step-bubble">Step 3</span> {{ cons_info.name.first }} listed their meal
+						preference as <span>{{ cons_info.custom.string[8].content }}</span
+						>.
+						<span
+							class="vegetarian"
+							ng-if="cons_info.custom.string[8].content.toLowerCase() === 'vegetarian'"
 						>
-						<input
-							class="form-control"
-							ng-disabled="true"
-							type="text"
-							value="{{ cons_info.custom.string[2].content }}"
-						/>
-					</div>
+							Make sure they receive the vegetarian wristband.</span
+						>
+						If you run out of any bands, tell the participant to visit Participant Support.
+					</p>
+					<div class="divider divider-margin"></div>
 				</div>
-				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label
-							data-toggle="tooltip"
-							title="The ID number assigned to the participant. This number should match the number on the packet and Cyclist's bike frame number."
-						>
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Participant
-							Number:</label
-						>
-						<input
-							class="form-control"
-							ng-disabled="true"
-							type="text"
-							value="{{ cons_info.custom.string[5].content }}"
-						/>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label
-							data-toggle="tooltip"
-							title="If this box is not checked, the participant must present a slip or a stamp from the medical team."
-						>
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Medical Form
-							Complete:</label
-						>
-						<input class="form-control" ng-disabled="true" type="text" value="{{ medform }}" />
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label
-							data-toggle="tooltip"
-							title="The participant's meal preference for the week of the event."
-						>
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Meal
-							Preference:</label
-						>
-						<input
-							class="form-control"
-							ng-disabled="true"
-							type="text"
-							value="{{ cons_info.custom.string[8].content }}"
-						/>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label
+				<div class="col-xs-12 step step-2 remove-padding">
+					<p>
+						<span
+							class="step-bubble"
 							data-toggle="tooltip"
 							title="This number should match the tent chip in the participant's packet. It's OK to update number if incorrect or the participant wants to move. Make sure this number matches whatever tent-chip they have when they leave check-in."
+							>Step 4</span
 						>
-							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Tent
-							Address:</label
-						>
-						<input class="form-control" type="text" ng-model="tentAddress" id="tentAddress" />
-					</div>
+						Confirm the tent address in the box below. This number should make the chip assigned to
+						the participant. If the address has changed please enter it in the box below.
+					</p>
+					<input
+						style="max-width: 250px;"
+						class="form-control"
+						type="text"
+						ng-model="tentAddress"
+						id="tentAddress"
+					/>
+					<div class="divider divider-margin"></div>
 				</div>
-				<div class=" col-xs-12 ">
+				<div class="col-xs-12 remove-padding">
 					<h3>
 						<span class="glyphicon glyphicon-info-sign " aria-hidden="true "></span> Confirm
 						Check-in
 					</h3>
-					<div class="divider "></div>
+					<div class="divider divider-margin"></div>
 					<div class="checkbox">
 						<label> <input ng-model="waiver " type="checkbox" /> Received signed waiver. </label>
 					</div>
 					<div class="checkbox">
-						<label>
-							<input ng-model="packet " type="checkbox" /> Delivered particpant packet
-						</label>
+						<label> <input ng-model="packet " type="checkbox" /> Delivered packet </label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input ng-model="tentAddressConfirm " type="checkbox" /> Confirmed Tent Address
+							<input ng-model="tentAddressConfirm " type="checkbox" /> Confirmed Tent-address
 						</label>
 					</div>
 				</div>
@@ -172,13 +99,13 @@
 		</div>
 		<!-- End AIDS/LifeCycle Information -->
 		<div class="row ">
-			<form action=" ">
+			<form ng-submit="checkIn()">
 				<!-- DAY ZERO CHECKIN CONTROLS -->
 				<div class="col-xs-12 dotr_button" ng-if="!success">
 					<br />
 					<button
+						type="submit"
 						ng-disabled="!tentAddressConfirm || !packet || !waiver || tentAddress.length < 2"
-						ng-click="checkIn() "
 						class="btn btn-success part-info "
 					>
 						CHECK-IN
