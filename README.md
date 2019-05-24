@@ -6,27 +6,37 @@ ALC needed a system that could track registered participants at events throughou
 
 ## Installation
 
-1.  Install the [required software](#required-software)
-2.  Clone or download this repo
-3.  Run `npm install`
+1.  Install the [required software](#required-software).
+
+2.  Clone or download this repo.
+
+3.  Run `npm install`.
+
 4.  [Prepare and upload the participant roster](#update-the-participant-roster)
-5.  Run `npm run [fetch-parts-win|fetch-parts-mac]` to update/overwrite the participant roster (see [Tools and Dependencies](#tools-and-dependencies)). Or, place a copy in `js/participants.json`. The `npm run ...` commands are for convenience when you have to update 50+ machines on Orientation Day.
-6.  Create the file `.config/luminate.config.js` - see below
+
+5.  Update (overwrite) the participant roster by running `npm run [fetch-parts-win | fetch-parts-mac]` (see [Tools and Dependencies](#tools-and-dependencies)). Or, manually place a copy in `js/participants.json`. The `npm run ...` commands are for convenience when you have to update 50+ machines on Orientation Day.
+
+6.  In the `config` directory, create the `luminate.config.js` file - [see below](#luminate-api-key).
+
 7.  [Orientation Day] Make Firefox the default browser. Then run `npm start` to open the app. Make sure [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) is enabled. You will know it's enabled if the icon is green.
-8.  [Pre-Orientation Day] Upload FTP to `​​customerftp.convio.net` (a new directory is OK)
+
+8.  [Pre-Orientation Day] Upload FTP to a directory on `​​customerftp.convio.net`.
 
 ## Required Software
 
-1.  [Firefox](https://www.mozilla.org/en-US/firefox/)
-2.  [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
-3.  [Node.js](https://nodejs.org/en/)
+1.  [Node.js](https://nodejs.org/en/)
+2.  [Firefox](https://www.mozilla.org/en-US/firefox/)
+3.  [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
 
 ## Luminate API Key
 
 ```javascript
 var luminate_config = {
+	// Luminate API Key
 	api_key: 'XXXXXXXXXXXXXXXXXX',
+	// The text saved to the body of the Luminate interaction
 	interaction_body: 'Text for the body interaction.',
+	// Initialize a username and password
 	username: 'LUMINATE ONLINE USERNAME',
 	password: 'LUMINATE ONLINE PASSWORD'
 };
