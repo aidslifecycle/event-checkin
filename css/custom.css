@@ -347,3 +347,9 @@ span.step-bubble {
 span.vegetarian {
 	color: green;
 }
+
+p.fundraisingMinimum {
+	background: red;
+	color: white;
+	border-radius: 8px;
+}

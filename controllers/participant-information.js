@@ -47,6 +47,7 @@ onlineCheckin.controller('participantInformation', function(
 			$scope.loading = false;
 			$scope.cons_info = data.data.getConsResponse;
 			$scope.tentAddress = $scope.cons_info.custom.string[7].content;
+			$scope.fundraisingMinimum = false;
 
 			tentAddressService
 				.getTentAddress($scope.cons_id)
@@ -62,12 +63,20 @@ onlineCheckin.controller('participantInformation', function(
 					$scope.tentAddress = $scope.cons_info.custom.string[7].content;
 					console.warn('Firebase tentAddress error', error);
 				});
+
+			fundraisingService.getFundraisingResults($scope.cons_id).then(function(fundraisingAmount) {
+				$scope.fundraisingResults = fundraisingAmount / 100;
+				console.log('part type check', $scope.cons_info.custom.string[17].content);
+				$scope.fundraisingMinimum = true;
+			});
+
 			// Enable tooltips
 			$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-			$scope.medform = $scope.cons_info.custom.boolean[1].content
+			$scope.medform = $scope.cons_info.custom.boolean[3].content
 				? 'We have received the their medical survey. Proceed to step 3.'
 				: 'We have not received their medical survey. The participant needs to present you with a pass from the Medical team. If you need help ask a staff member.';
 			var customBooleans = $scope.cons_info.custom.boolean;
+			console.table('customBooleans', customBooleans);
 			var customStrings = $scope.cons_info.custom.string;
 			$scope.groupArray = [].concat(customBooleans, customStrings);
 
@@ -77,10 +86,6 @@ onlineCheckin.controller('participantInformation', function(
 			$rootScope.loggedIn = false;
 			$location.path('/');
 		}
-	});
-
-	fundraisingService.getFundraisingResults($scope.cons_id).then(function(fundraisingAmount) {
-		$scope.fundraisingResults = fundraisingAmount / 100;
 	});
 
 	$scope.checkIn = function() {
