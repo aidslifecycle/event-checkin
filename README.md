@@ -1,54 +1,68 @@
 # AIDS/LifeCycle Check-in S.P.A.
 
+## Summary
 
+ALC needed a system that could track registered participants at events throughout the year, and most importantly, Orientation Day. The goal of the application is to quickly verify participant information and check-in ALC participants at events either on PC or mobile device. For security reasons the application should be hosted on Blackbaud servers. Currently the site resides on the tofighthiv.org server.
 
-#### Summary
+## Installation
 
-ALC needed a system that could track registered participants at events throughout the year, and Orientation Day. The goal of the application is to quickly verify participant information and check-in ALC participants at events either on PC or mobile device. For security reasons, the application should be hosted on Blackbaud servers. Currently the site resides on the tofighthiv.org server. 
+1.  Install the [required software](#required-software)
+2.  Clone or download this repo
+3.  Run `npm install`
+4.  [Prepare and upload the participant roster](#update-the-participant-roster)
+5.  Run `npm run [fetch-parts-win|fetch-parts-mac]` to update/overwrite the participant roster (see [Tools and Dependencies](#tools-and-dependencies)). Or, place a copy in `js/participants.json`. The `npm run ...` commands are for convenience when you have to update 50+ machines on Orientation Day.
+6.  Create the file `.config/luminate.config.js` - see below
+7.  [Orientation Day] Make Firefox the default browser. Then run `npm start` to open the app. Make sure [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) is enabled. You will know it's enabled if the icon is green.
+8.  [Pre-Orientation Day] Upload FTP to `​​customerftp.convio.net` (a new directory is OK)
 
+## Required Software
 
-#### Installation
-
-1) `git clone <repo URL>`
-2) `npm install`
-3) Update/overwrite `js/participants.json`
-4) Create the file `.config/luminate.config.js` - see below
-4) Upload FTP to `​​customerftp.convio.net` (a new directory is OK)
-5) Update Wordpress if you would like to create a short URL that points to the app
-
-#### To Do
-1) hosted on an external server
-2) include an admin panel
+1.  [Firefox](https://www.mozilla.org/en-US/firefox/)
+2.  [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
+3.  [Node.js](https://nodejs.org/en/)
 
 ## Luminate API Key
 
 ```javascript
 var luminate_config = {
-	api_key: "XXXXXXXXXXXXXXXXXX",
-	interaction_body: "Text for the body interaction.",
-	username: "LUMINATE ONLINE USERNAME",
-	password: "LUMINATE ONLINE PASSWORD"
-}
+	api_key: 'XXXXXXXXXXXXXXXXXX',
+	interaction_body: 'Text for the body interaction.',
+	username: 'LUMINATE ONLINE USERNAME',
+	password: 'LUMINATE ONLINE PASSWORD'
+};
 ```
 
-## Updating the Participant Roster (JSON file)
+## Update the Participant Roster
 
-First, run the _***ALC Event Check-In (Build CSV to JSON)***_ located in the _***Report Writer***_ in Luminate Online.  
+First, run the _***ALC Event Check-In (Build CSV to JSON)***_ located in the _***Report Writer***_ in Luminate Online.
+
 > _You may edit the report to change the TeamRaiser event and the name of the report - ***DO NOT*** edit the column names in step 3 of the report builder._
 
 ![Run check-in report](https://raw.githubusercontent.com/jeffreylowy/aidslifecycle-checkin/master/readme/001_run_report.png)
 
-In Sumbline Text (v3+), open the .csv downloaded from Luminate Online. 
+Download the report as `.csv`. Open the file in a plain-text editor (not Excel or another spreadsheet app). Copy and paste (or upload) the data into [Mr. Data Converter](https://shancarter.github.io/mr-data-converter) to convert the file to `json` format. The shape of the output data from [Mr. Data Converter](https://shancarter.github.io/mr-data-converter) should be an array of javascript objects.
 
-![Run check-in report](https://raw.githubusercontent.com/jeffreylowy/aidslifecycle-checkin/master/readme/002_open_csv_sublime.png)
+Example:
 
-Open Sublime's Command Palatte, type _***DataConverter***_ and choose _***to JSON***_. Sublime will convert the .csv to JSON format. Save/overwrite the file to the _***js***_ directory as _***participants.json***_.
-
-![Run check-in report](https://raw.githubusercontent.com/jeffreylowy/aidslifecycle-checkin/master/readme/003_dataconverter.png)
+```json
+[
+	{
+		"consId": 123456,
+		"first": "Jane",
+		"last": "Smith",
+		"alcnum": 8000,
+		"team": "Super Cool Team",
+		"type": "Roadie",
+		"city": "San Francisco",
+		"med": "false"
+	}
+]
+```
 
 ## Blackbaud Server
 
 #### Scripts and Stylesheets
+
 Blackbaud servers will not serve mixed content (files server from http and https). Scripts and style sheets must be loaded in the head of the page as `js/file_name.js` not `/js/file_name.js`. The later will cause the application to break.
 
 ```html
@@ -66,27 +80,22 @@ Blackbaud servers will not serve mixed content (files server from http and https
 ```
 
 #### Server Caching
-Blackbaud's server allows files to be overwritten, but it may take up to 15 minutes to see the changes for CSS and JS files.
 
-## FAQ
-
-***Why do we use a report and not Blackbaud's Convio API to pull in the participant data?***
-The Convio API returns a max of 1000 constituent records in an API. ALC TeamRaisers average 5000+ registered participants. While not impossible for the check-in app to use the Convio API, it would slow down the line and require a constant internet connection, which is not always available at ALC events.
+Blackbaud's server may take up to 15 minutes to see the changes for CSS and JS files.
 
 ## Tools and Dependencies
 
-#### Sublime 
-[Sublime Text 3](https://www.sublimetext.com/3)<br />
-[Data Converter package from Sublime Package Manager](https://packagecontrol.io/packages/DataConverter)
+[Installing PowerShell Core on macOS](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-macos?view=powershell-6)
 
-#### Node Dependencies
-```
-"dependencies": {
-  "angular": "^1.3.3",
-  "angular-cookies": "^1.3.3",
-  "angular-route": "^1.3.3",
-  "angular-ui-bootstrap": "^0.14.3",
-  "bootstrap": "^3.3.6",
-  "jquery": "^3.3.1"
-}
-```
+## Docs
+
+[Firebase - Read and Write Data on the Web](https://firebase.google.com/docs/database/web/read-and-write)
+
+[Invoke-RestMethod (PowerShell utility)](https://docs.microsoft.com/en-us/powershell/module/Microsoft.PowerShell.Utility/Invoke-RestMethod?view=powershell-6)
+
+[Using Visual Studio Code for PowerShell Development](https://docs.microsoft.com/en-us/powershell/scripting/components/vscode/using-vscode?view=powershell-6)
+
+## FAQ
+
+**_Why do we use a report and not Blackbaud's Convio API to pull in the participant data?_**
+The Convio API returns a max of 1000 constituent records in an API. ALC TeamRaisers average 5000+ registered participants. While not impossible for the check-in app to use the Convio API, it would slow down the line and require a constant internet connection, which is not always available at ALC events.
