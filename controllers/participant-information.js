@@ -42,14 +42,27 @@ onlineCheckin.controller('participantInformation', function(
 		console.log(val);
 	});
 
-	console.log(tentAddressService.getTentAddress());
-
 	constituentService.getConsRecord($scope.cons_id).then(function(data) {
 		if (data) {
-			// Enable tooltips
-			$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 			$scope.loading = false;
 			$scope.cons_info = data.data.getConsResponse;
+
+			tentAddressService
+				.getTentAddress($scope.cons_id)
+				.once('value')
+				.then(function(snap) {
+					var checkinData = snap.val();
+					var firebaseTentAddress = checkinData && checkinData.tent ? checkinData.tent : null;
+					console.log('firebaseTentAddress', firebaseTentAddress);
+					$scope.tentAddress = firebaseTentAddress || $scope.cons_info.custom.string[7].content;
+					$scope.$digest();
+				})
+				.catch(function(error) {
+					$scope.tentAddress = $scope.cons_info.custom.string[7].content;
+					console.warn('Firebase tentAddress error', error);
+				});
+			// Enable tooltips
+			$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 			$scope.tentAddress = $scope.cons_info.custom.string[7].content;
 			$scope.medform = $scope.cons_info.custom.boolean[1].content
 				? 'Recieved'
@@ -57,6 +70,7 @@ onlineCheckin.controller('participantInformation', function(
 			var customBooleans = $scope.cons_info.custom.boolean;
 			var customStrings = $scope.cons_info.custom.string;
 			$scope.groupArray = [].concat(customBooleans, customStrings);
+
 			console.table($scope.cons_info.custom.string);
 		} else {
 			alert('Lost connection! Refresh the page and login again.');

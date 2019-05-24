@@ -1,9 +1,8 @@
 onlineCheckin.service('tentAddressService', function() {
 	return {
-		getTentAddress: function() {
-			// var incentives = firebaseIncentives.database().ref('/incentives/' + cons_id);
-			// return incentives;
-			return 'Mock tent address: A12';
+		getTentAddress: function(cons_id) {
+			var checkinData = firebaseCheckin.database().ref('/checkin/' + cons_id);
+			return checkinData;
 		}
 	};
 });
