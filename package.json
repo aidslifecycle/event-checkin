@@ -1,33 +1,34 @@
 {
-  "name": "alc-event-checkin-v2",
-  "version": "1.0.0",
-  "description": "Check-in system for AIDS/LifeCycle",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo 'hello'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jeffreylowy/alc-event-checkin-v2.git"
-  },
-  "keywords": [
-    "aidslifecycle"
-  ],
-  "author": "jeffreylowy@gmail.com",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jeffreylowy/alc-event-checkin-v2/issues"
-  },
-  "homepage": "https://github.com/jeffreylowy/alc-event-checkin-v2#readme",
-  "dependencies": {
-    "angular": "^1.3.3",
-    "angular-cookies": "^1.3.3",
-    "angular-route": "^1.3.3",
-    "angular-ui-bootstrap": "^0.14.3",
-    "bootstrap": "^3.3.6",
-    "jquery": "^3.3.1"
-  },
-  "devDependencies": {
-    "prettier": "^1.12.1"
-  }
+	"name": "alc-event-checkin-v2",
+	"version": "1.0.0",
+	"description": "Check-in system for AIDS/LifeCycle",
+	"main": "index.js",
+	"scripts": {
+		"fetch-parts-win": "PS ./download_participants.ps1",
+		"fetch-parts-mac": "pwsh ./download_participants.ps1",
+		"start": "node ./node_modules/http-server/bin/http-server --cors -o"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jeffreylowy/alc-event-checkin-v2.git"
+	},
+	"keywords": ["aidslifecycle"],
+	"author": "jeffreylowy@gmail.com",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/jeffreylowy/alc-event-checkin-v2/issues"
+	},
+	"homepage": "https://github.com/jeffreylowy/alc-event-checkin-v2#readme",
+	"dependencies": {
+		"angular": "^1.3.3",
+		"angular-cookies": "^1.3.3",
+		"angular-route": "^1.3.3",
+		"angular-ui-bootstrap": "^0.14.3",
+		"bootstrap": "^3.3.6",
+		"http-server": "^0.11.1",
+		"jquery": "^3.3.1"
+	},
+	"devDependencies": {
+		"prettier": "^1.12.1"
+	}
 }

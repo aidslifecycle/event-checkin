@@ -1,66 +1,109 @@
 <div class="panel panel-primary boxShadow">
-    <div class="panel-heading">
-        <h3 style="display:inline-block;">Search for a Participant</h3>
+	<div class="panel-heading">
+		<h3 style="display:inline-block;">Search for a Participant</h3>
 
-        <button style="margin:10px 0 0 15px;" class="btn btn-info btn-lg col-xs-2 searchBtn pull-right" ng-click="$event.preventDefault(); clear()">CLEAR</button>
-    </div>
-    <div class="panel-body">
-        <form action="" name="consSearch" class="col-xs-12">
-            <div class="alert alert-info" role="alert">
-                <h4>
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Search for a participant or narrow the results by using any of the fields below.</h4>
-            </div>
-            <div class="col-sm-6">
-                <input id="firstName" type="text" class="form-control input-lg" placeholder="First Name" ng-model="searchBox.first" name="searchBox.first"
-                    required minlength="1">
-            </div>
-            <div class="col-sm-6">
-                <input id="lastName" type="text" class="form-control input-lg" placeholder="Last Name" ng-model="searchBox.last" name="searchBox.last"
-                    required minlength="1">
-            </div>
-            <!-- TEAM AND PARTICIPANT NUMBER -->
-            <div class="col-sm-6">
-                <input id="alcNumber" type="number" class="form-control input-lg" placeholder="AIDS/LifeCycle Number" ng-model="searchBox.alcnum"
-                    name="searchBox.alcnum" required minlength="1">
-            </div>
-            <div class="col-sm-6">
-                <input id="teamName" type="text" class="form-control input-lg" placeholder="Team Name" ng-model="searchBox.team" name="searchBox.team"
-                    required minlength="1">
-            </div>
-        </form>
-        <div class="col-xs-12 table-responsive" ng-if="searchResults">
-            <table class="table table-hover table-striped">
-                <thead>
-                    <td>
-                        <h5>First Name</h5>
-                    </td>
-                    <td>
-                        <h5>Last Name</h5>
-                    </td>
-                    <td>
-                        <h5>Number</h5>
-                    </td>
-                    <td>
-                        <h5>Team</h5>
-                    </td>
-                    <td>
-                        <h5>Type</h5>
-                    </td>
-                    <td>
-                        <h5>City</h5>
-                    </td>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="participant in searchResults | filter:searchBox | orderBy:'+lastName'  | limitTo:100" ng-click="open(participant)">
-                        <td>{{participant.first}}</td>
-                        <td>{{participant.last}}</td>
-                        <td>{{participant.alcnum}}</td>
-                        <td>{{participant.team}}</td>
-                        <td>{{participant.type}}</td>
-                        <td>{{participant.city}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+		<button
+			style="margin:10px 0 0 15px;"
+			class="btn btn-info btn-lg col-xs-2 searchBtn pull-right"
+			ng-click="$event.preventDefault(); clear()"
+		>
+			CLEAR
+		</button>
+	</div>
+	<div class="panel-body">
+		<form action="" name="consSearch" class="col-xs-12">
+			<div class="alert alert-info" role="alert">
+				<h4>
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Search for a
+					participant or narrow the results by using any of the fields below.
+				</h4>
+			</div>
+			<div class="col-sm-6">
+				<input
+					id="firstName"
+					type="text"
+					class="form-control input-lg"
+					placeholder="First Name"
+					ng-model="searchBox.first"
+					name="searchBox.first"
+					required
+					minlength="1"
+				/>
+			</div>
+			<div class="col-sm-6">
+				<input
+					id="lastName"
+					type="text"
+					class="form-control input-lg"
+					placeholder="Last Name"
+					ng-model="searchBox.last"
+					name="searchBox.last"
+					required
+					minlength="1"
+				/>
+			</div>
+			<!-- TEAM AND PARTICIPANT NUMBER -->
+			<div class="col-sm-6">
+				<input
+					id="alcNumber"
+					type="number"
+					class="form-control input-lg"
+					placeholder="AIDS/LifeCycle Number"
+					ng-model="searchBox.alcnum"
+					name="searchBox.alcnum"
+					required
+					minlength="1"
+				/>
+			</div>
+			<div class="col-sm-6">
+				<input
+					id="teamName"
+					type="text"
+					class="form-control input-lg"
+					placeholder="Team Name"
+					ng-model="searchBox.team"
+					name="searchBox.team"
+					required
+					minlength="1"
+				/>
+			</div>
+		</form>
+		<div class="col-xs-12 table-responsive" ng-if="searchResults">
+			<table class="table table-hover table-striped">
+				<thead>
+					<td>
+						<h5>First Name</h5>
+					</td>
+					<td>
+						<h5>Last Name</h5>
+					</td>
+					<td>
+						<h5>Number</h5>
+					</td>
+					<td>
+						<h5>Team</h5>
+					</td>
+					<td>
+						<h5>Type</h5>
+					</td>
+					<td>
+						<h5>City</h5>
+					</td>
+				</thead>
+				<tbody>
+					<tr
+						ng-repeat="participant in searchResults | filter:searchBox | orderBy:'+last'  | limitTo:100"
+						ng-click="open(participant)"
+					>
+						<td>{{ participant.first }}</td>
+						<td>{{ participant.last }}</td>
+						<td>{{ participant.alcnum }}</td>
+						<td>{{ participant.team }}</td>
+						<td>{{ participant.type }}</td>
+						<td>{{ participant.city }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

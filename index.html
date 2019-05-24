@@ -2,38 +2,39 @@
 <html ng-app="onlineCheckin" lang="en">
 	<head>
 		<title>Event Check-in</title>
+		<!-- Bootstrap -->
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 		/>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<script src="js/jquery.min.js"></script>
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+		<script src="node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
 		<script src="config/luminate.config.js"></script>
-		<!-- <script src="js/electron-test.js"></script> -->
-		<script src="js/bootstrap.min.js"></script>
+		<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 		<!-- AngularJS -->
-		<script src="js/angular.min.js"></script>
-		<script src="js/angular-route.min.js"></script>
-		<script src="js/angular-cookies.min.js"></script>
-		<script src="js/ui-bootstrap-tpls.min.js"></script>
+		<script src="node_modules/angular/angular.min.js"></script>
+		<script src="node_modules/angular-route/angular-route.min.js"></script>
+		<script src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+		<script src="node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<!-- ALC Application -->
 		<link rel="stylesheet" href="css/custom.css" />
 		<script src="js/app-check-in.js"></script>
 		<script src="controllers/login.js"></script>
 		<script src="controllers/participant-search.js"></script>
-		<script src="controllers/incentive-search.js"></script>
+		<script src="services/tentAddress.js"></script>
+		<script src="services/constituent.js"></script>
+		<script src="controllers/participant-information.js"></script>
+		<script src="services/logInteraction.js"></script>
+		<script src="controllers/incentive-information.js"></script>
+		<script src="services/fundraising.js"></script>
+		<script src="services/participantProgress.js"></script>
+		<script src="services/telephone.js"></script>
 		<script src="controllers/rsvp-search.js"></script>
 		<script src="controllers/guest-info.js"></script>
-		<script src="controllers/participant-information.js"></script>
-		<script src="controllers/incentive-information.js"></script>
-		<script src="services/logInteraction.js"></script>
-		<script src="services/constituent.js"></script>
-		<script src="services/participantProgress.js"></script>
-		<script src="services/fundraising.js"></script>
-		<script src="services/telephone.js"></script>
 		<script src="services/incentives.js"></script>
+		<script src="controllers/incentive-search.js"></script>
 		<link rel="icon" href="img/favicon.png" />
 	</head>
 
