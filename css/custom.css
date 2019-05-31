@@ -353,3 +353,8 @@ p.fundraisingMinimum {
 	color: white;
 	border-radius: 8px;
 }
+
+.cyclist-warning {
+	color: red;
+	font-weight: bold;
+}
