@@ -2,31 +2,51 @@
 
 ## Summary
 
-ALC needed a system that could track registered participants at events throughout the year, and most importantly, Orientation Day. The goal of the application is to quickly verify participant information and check-in ALC participants at events either on PC or mobile device. For security reasons the application should be hosted on Blackbaud servers. Currently the site resides on the tofighthiv.org server.
+The goal of the application is to quickly verify participant information and check-in ALC participants at events either on PC or mobile device.
+
+For events other than Orientation Day, the app should be hosted on Blackbaud servers. Currently the site resides on the tofighthiv.org server.
+
+On Orientation Day, the app should be hosted and run via a local server. A local server is required to allow admins to fetch fundraising results.
 
 ## Installation
 
-1.  Install the [required software](#required-software)
-2.  Clone or download this repo
-3.  Run `npm install`
+1.  Install the [required software](#required-software).
+
+2.  Clone or download this repo.
+
+3.  Run `npm install`.
+
 4.  [Prepare and upload the participant roster](#update-the-participant-roster)
-5.  Run `npm run [fetch-parts-win|fetch-parts-mac]` to update/overwrite the participant roster (see [Tools and Dependencies](#tools-and-dependencies)). Or, place a copy in `js/participants.json`. The `npm run ...` commands are for convenience when you have to update 50+ machines on Orientation Day.
-6.  Create the file `.config/luminate.config.js` - see below
-7.  [Orientation Day] Make Firefox the default browser. Then run `npm start` to open the app. Make sure [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) is enabled. You will know it's enabled if the icon is green.
-8.  [Pre-Orientation Day] Upload FTP to `​​customerftp.convio.net` (a new directory is OK)
+
+5.  Update (overwrite) the participant roster by running `npm run [fetch-parts-win | fetch-parts-mac]` (see [Tools and Dependencies](#tools-and-dependencies)). Or, manually place a copy in `js/participants.json`. The win/mac `npm run ...` commands are for convenience when 50+ machines require an update on Orientation Day.
+
+6.  In the `config` directory, create the `luminate.config.js` file - [see below](#luminate-api-key).
+
+7.  Orientation Day:
+
+    * Make Firefox the default browser.
+    * Run `npm start` to open the app.
+    * Make sure [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) is enabled - it's enabled if the icon is green.
+
+8.  Pre-Orientation Day:
+    * Upload FTP to a directory on `​​customerftp.convio.net`.
 
 ## Required Software
 
-1.  [Firefox](https://www.mozilla.org/en-US/firefox/)
-2.  [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
-3.  [Node.js](https://nodejs.org/en/)
+1.  [Node.js](https://nodejs.org/en/) - Needed to install dependencies and run the local server.
+2.  [Git](https://git-scm.com/) - Needed to clone the project. It's best to clone so you can fetch updates.
+3.  [Firefox](https://www.mozilla.org/en-US/firefox/) - Required for Orientation Day
+4.  [CORS Everywhere (Firefox addon)](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) - Required for Orientation Day
 
 ## Luminate API Key
 
 ```javascript
 var luminate_config = {
+	// Luminate API Key
 	api_key: 'XXXXXXXXXXXXXXXXXX',
+	// The text saved to the body of the Luminate interaction
 	interaction_body: 'Text for the body interaction.',
+	// Initialize a username and password
 	username: 'LUMINATE ONLINE USERNAME',
 	password: 'LUMINATE ONLINE PASSWORD'
 };
@@ -40,7 +60,9 @@ First, run the _***ALC Event Check-In (Build CSV to JSON)***_ located in the _**
 
 ![Run check-in report](https://raw.githubusercontent.com/jeffreylowy/aidslifecycle-checkin/master/readme/001_run_report.png)
 
-Download the report as `.csv`. Open the file in a plain-text editor (not Excel or another spreadsheet app). Copy and paste (or upload) the data into [Mr. Data Converter](https://shancarter.github.io/mr-data-converter) to convert the file to `json` format. The shape of the output data from [Mr. Data Converter](https://shancarter.github.io/mr-data-converter) should be an array of javascript objects.
+Download the report as `.csv`. Open the file in a plain-text editor (not Excel or another spreadsheet app). Use [Mr. Data Converter](https://shancarter.github.io/mr-data-converter) to convert the file to `json` format.
+
+The shape of the output data from [Mr. Data Converter](https://shancarter.github.io/mr-data-converter) should be an array of javascript objects.
 
 Example:
 

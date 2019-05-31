@@ -308,6 +308,58 @@ span.success-check {
 	color: limegreen;
 }
 
+<<<<<<< HEAD
 input[data='dotr-number'] {
 	max-width: 200px;
+=======
+/* Participant Information Steps */
+
+h3.intro {
+	color: rgba(0, 0, 0, 0.5);
+	font-size: 20px;
+	font-style: italic;
+	margin: 16px 0;
+}
+
+.step {
+	font-size: 18px;
+}
+
+div.remove-padding {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.step span {
+	font-style: italic;
+	font-weight: bold;
+}
+
+div.divider.divider-margin {
+	margin: 20px 0 !important;
+}
+
+span.step-bubble {
+	background: mediumseagreen;
+	border-radius: 4px;
+	color: white;
+	display: inline-block;
+	margin-bottom: 4px;
+	padding: 4px 8px;
+}
+
+span.vegetarian {
+	color: green;
+}
+
+p.fundraisingMinimum {
+	background: red;
+	color: white;
+	border-radius: 8px;
+}
+
+.cyclist-warning {
+	color: red;
+	font-weight: bold;
+>>>>>>> DAY_ZERO_2019
 }
