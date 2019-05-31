@@ -77,15 +77,15 @@ onlineCheckin.controller('participantInformation', function(
 			var med = false;
 			$scope.cons_info.custom.boolean.forEach(function(item) {
 				console.log('custom item', item);
-				if (item.id === 'custom_boolean3') {
+				if (item && item.content && item.id && item.id === 'custom_boolean3') {
 					med = item.content.toLowerCase() === 'true';
 					console.log('content', item.content, 'med', med);
 				}
 			});
 
-			$scope.medform = med
-				? 'We have received the their medical survey. Proceed to step 3.'
-				: 'We have not received their medical survey. The participant needs to present you with a pass from the Medical team. If you need help ask a staff member.';
+			$scope.medform = med;
+			// ? 'We have received the their medical survey. Proceed to step 3.'
+			// : 'We have not received their medical survey. The participant needs to present you with a pass from the Medical team. If you need help ask a staff member.';
 			var customBooleans = $scope.cons_info.custom.boolean;
 			//console.table('customBooleans', customBooleans);
 			var customStrings = $scope.cons_info.custom.string;

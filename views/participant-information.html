@@ -7,8 +7,7 @@
 			>
 			<span
 				style="margin-left: auto; border-radius: 4px; background: white; color: black; padding: 12px;"
-				>{{ fundraisingResults | currency }}</span
-			>
+				>{{ fundraisingResults | currency }}</span>
 		</h3>
 	</div>
 	<div class="panel-body" ng-if="loading">
@@ -32,23 +31,24 @@
 					<p>
 						<span class="step-bubble">Step 1</span> {{ cons_info.name.first }} is a
 						<span>{{ cons_info.custom.string[17].content }}</span
-						>. They are is assigned to number <span>{{ cons_info.custom.string[5].content }}</span
+						> assigned to number <span>{{ cons_info.custom.string[5].content }}</span
 						>. Take {{ cons_info.name.first }}'s signed waiver and send a runner to find a packet
 						with their number.
 					</p>
 					<p ng-if="fundraisingMinimum" class="cyclist-warning">
-						This participant has not met the fundraising minimum.
+						This participant has not met the fundraising minimum. The participant needs to present you with a pass from Donor Services. If they do not have the pass, direct them to the Donor Services area of the room.
 					</p>
 					<div class="divider divider-margin"></div>
 				</div>
 				<div class="col-xs-12 step step-2 remove-padding">
-					<p><span class="step-bubble">Step 2</span> {{ medform }}</p>
+					<p ng-if="medform"><span class="step-bubble">Step 2</span> We have received the their medical information. Proceed to step 3.</p>
+					<p ng-if="!medform"><span class="step-bubble">Step 2</span> <span class="cyclist-warning" >We have not received this person's medical information. The participant needs to present you with a pass from the Medical team. If they do not have the pass, direct them to the Medical team.</p>
 					<div class="divider divider-margin"></div>
 				</div>
 				<div class="col-xs-12 step step-2 remove-padding">
 					<p>
-						<span class="step-bubble">Step 3</span> {{ cons_info.name.first }} listed their meal
-						preference as <span>{{ cons_info.custom.string[8].content }}</span
+						<span class="step-bubble">Step 3</span> {{ cons_info.name.first }}'s meal
+						preference is <span>{{ cons_info.custom.string[8].content }}</span
 						>.
 						<span
 							class="vegetarian"
@@ -56,7 +56,7 @@
 						>
 							Make sure they receive the vegetarian wristband.</span
 						>
-						If you run out of any bands, tell the participant to visit Participant Support.
+						Make sure the participant has the necessary wrist bands. If you run out of any bands, tell the participant to visit Participant Support tomorrow or any day during the week.
 					</p>
 					<div class="divider divider-margin"></div>
 				</div>
@@ -68,8 +68,8 @@
 							title="This number should match the tent chip in the participant's packet. It's OK to update number if incorrect or the participant wants to move. Make sure this number matches whatever tent-chip they have when they leave check-in."
 							>Step 4</span
 						>
-						Confirm the tent address in the box below. This number should make the chip assigned to
-						the participant. If the address has changed please enter it in the box below.
+						Confirm the tent address in the box below. This number should match the chip assigned to
+						the participant. If the address is blank or needs to be changed please enter it in the box below.
 					</p>
 					<input
 						style="max-width: 250px;"
