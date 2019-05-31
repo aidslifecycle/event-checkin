@@ -58,6 +58,7 @@ onlineCheckin.service('LogFirebase', function($http, $rootScope, $log, $location
 				.ref('checkin/' + cons_id)
 				.update(
 					{
+						cons_id: cons_id,
 						email: email,
 						tent: tent,
 						fundraising: fundraising,
